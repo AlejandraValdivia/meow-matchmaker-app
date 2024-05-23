@@ -21,8 +21,8 @@ app.use(session({
 app.use(flash());
 
 // initialize passport
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // middleware for tracking users and alerts
 app.use((req, res, next) => {
@@ -33,6 +33,16 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => {
     res.render('home', {});
+});
+
+// ======= GET ROUTES =======
+app.get('/auth/signup', (req, res) => {
+    res.render('auth/signup', {})
+});
+
+// --- go to login page ---
+app.get('/auth/login', (req, res) => {
+    res.render('auth/login', {})
 });
 
 const server = app.listen(PORT, () => {
