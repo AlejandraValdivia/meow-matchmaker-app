@@ -65,6 +65,16 @@ app.post("/auth/signup", async (req, res) => {
         phone: req.body.phone,
         password: req.body.password,
       });
+
+      // authenticate the user via passport
+      passport.authenticate('local', {
+        successRedirect: '/',
+        successFlash: `Welcome ${newUser.name}! Account created.`
+      })(req, res);
+      
+    } else {
+        req.flash('error', 'Email already exists. Try another email');
+        res.redirect('/auth/signup');
     }
   } catch (error) {
     console.error("--- ERROR IN SINGUP POST----\n", error);
