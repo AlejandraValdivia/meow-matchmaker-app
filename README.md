@@ -30,7 +30,7 @@ The Meow Matchmaker App is a web application designed to connect users who are i
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/cat-adoption-app.git
+   git clone https://github.com/AlejandraValdivia/meow-matchmaker-app
    cd cat-adoption-app
    ```
 
@@ -75,6 +75,7 @@ Open a pull request.
 
 - id
 - name
+- image
 - age
 - breed
 - status

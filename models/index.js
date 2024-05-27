@@ -5,6 +5,7 @@ mongoose.connect(process.env.MONGO_URI);
 
 // import models
 const User = require('./user');
+const Cat = require('./cat');
 
 const db = mongoose.connection;
 
@@ -14,4 +15,5 @@ db.on('error', (error) => console.log('Database error \n', error));
 module.exports = {
     // models go here
     User,
+    Cat
 }
