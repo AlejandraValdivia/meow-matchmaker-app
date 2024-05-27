@@ -49,8 +49,8 @@ app.get('/profile', isLoggedIn, (req, res) => {
 
 // any authenticated route will need to have isLoggedIn before controller
 // app.get('/pokemon', isLoggedIn, (req, res) => {
-//     // get data
-//     // render page + send data to page
+//      get data
+//      render page + send data to page
 // });
 
 // app.get('/pokemon/:id/edit', isLoggedIn, (req, res) => {});
