@@ -19,14 +19,15 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <% console.log('---- MESSAGES ------', alerts.success) %> <% if
+   <% console.log('---- MESSAGES ------', alerts.success) %> <% if
     (alerts.success) { %> <% alerts.success.forEach(msg => { %>
 
     <div class="alert alert-success"><%= msg %></div>
-    <% }) %> <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
+    <% }) %> 
+    <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
     %>
     <div class="alert alert-danger"><%= msg %></div>
-    <% }) %> <% } %>
+    <% }) %> <% } %> 
 
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -82,6 +83,7 @@
                     <a class="dropdown-item" href="/auth/logout">Logout</a>
                   </li>
                   <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/images/search">Cats</a></li>
                   <% } %>
                 </ul>
               </li>
@@ -110,13 +112,13 @@
         </div>
       </div>
       <div class="home-img">
-        <img src="https://i.imgur.com/nO93ssE.mp4" alt="" />
+        
       </div>
     </section>
 
     <section class="about" id="about">
       <div class="about-img">
-        <img src="https://i.imgur.com/2B25MrM.jpeg" alt="" />
+        <img src="https://i.imgur.com/6WWb0la.jpeg" alt="" />
       </div>
       <div class="about-content">
         <h2 class="heading">About <span>Me</span></h2>
@@ -131,7 +133,7 @@
           laboriosam delectus praesentium.
         </p>
         <p><span>I can't wait to play with you!🐱</span></p>
-        <a href="#" class="btn">Read More</a>
+        <a href="cats" class="btn">Read More</a>
       </div>
     </section>
     <!-- services section design -->
@@ -147,7 +149,7 @@
             reprehenderit omnis possimus facilis explicabo iure non enim, illum
             magni atque soluta et deleniti odio molestias.
           </p>
-          <a href="https://alejandravaldivia.github.io/portfolio/" class="btn"
+          <a href="/cats" class="btn"
             >Read More</a
           >
         </div>
@@ -160,18 +162,18 @@
             reprehenderit omnis possimus facilis explicabo iure non enim, illum
             magni atque soluta et deleniti odio molestias.
           </p>
-          <a href="#" class="btn">Read More</a>
+          <a href="/cats" class="btn">Read More</a>
         </div>
 
         <div class="services-box">
-          <i class='bx bx-home-heart'></i>
+          <i class="bx bx-home-heart"></i>
           <h3>On-site Volunteer</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
             reprehenderit omnis possimus facilis explicabo iure non enim, illum
             magni atque soluta et deleniti odio molestias.
           </p>
-          <a href="#" class="btn">Read More</a>
+          <a href="/cats" class="btn">Read More</a>
         </div>
       </div>
     </section>
@@ -259,6 +261,14 @@
         </div>
       </div>
     </section>
+
+    <div class="contact" id="contact">
+  
+      <p><%= //breed.name %></p>
+      <br />
+      <img src="<%= //breed.url %>" alt="" />
+    </div>
+
     <!-- footer section design -->
     <footer class="footer">
       <div class="footer-text heading">

@@ -3,19 +3,17 @@ const bcrypt = require('bcryptjs');
 
 const catSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    breed: { type: String, required: true},
+    description: { type: String, required: true},
+    image: { type: String},
+    lifeSpan: { type: String},
+    origin: { type: String},
+    affectionLevel: { type: Number}
 }, { timestamps: true });
 
-catSchema.pre('save', function(next) {
-    console.log('---------- PASSWORDS ----------------', this.password ); // delete later...
-    let hash = bcrypt.hashSync(this.password, 12);
-    console.log('---------- HASH ----------------', hash); // might delete later
-    this.password = hash;
-    next();
-})
+
 
 // create the model and export it
-const Cat = mongoose.model('User', catSchema);
+const Cat = mongoose.model('Cat', catSchema);
 
 // make this model available for the index file
 module.exports = Cat;

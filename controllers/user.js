@@ -1,10 +1,17 @@
 // sudo code goes here
 
 // API
-router.get('/user', isLoggedIn, (req, res) => {
+app.get('/user', isLoggedIn, (req, res) => {
     User.findOne({ user_id: req.user._id });
-    res.render('profile', { name: name });
+    res.render('profile', { name, email, phone, password });
 });
+
+app.get('/user/new', isLoggedIn, (req, res) => {
+    User.findOne({ user_id: req.user._id });
+    res.render('profile', { name, email, phone, password });
+});
+
+
 
 
 

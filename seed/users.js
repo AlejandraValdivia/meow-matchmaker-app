@@ -13,3 +13,24 @@ User.create({
 .catch(error => {
     console.log('---- ERROR ----', error);
 });
+
+User.create({
+    name: 'John Smith',
+    email: 'johnsmith@email.com',
+    phone: '111-222-3333',
+    password: 'asdfghjkl',
+})
+
+User.create({ 
+    name: 'Alejandra Valdivia',
+    email: 'alexvcodes@gmail.com',
+    phone: '111-222-3333',
+    password: 'hellokitty',
+})
+User.find({})
+.then(user => {
+    console.log('---- USER ----', user);
+})
+.catch(error => {
+    console.log('---- ERROR ----', error);
+});

@@ -92,25 +92,43 @@
         </div>
       </nav>
     </header>
-    
+
     <section class="contact" id="contact">
-        <h2 class="heading">View our <span>Cat</span> Gallery</h2>
-   
-        <div>
-          <ul class="">
-            <% cats.forEach(cat => { %>
-              <div>
-                <li><a href="/cats/<%= cat._id %>"><%= cat.name %></a></li>
-                <img src="<%= cat.image %>" alt="">
-                <p><%= cat.description %></p>
-                <p><%= cat.age %></p>
-                <p><%= cat.origin %></p>
-                <p><%= cat.affectionLevel %></p>
-                <a class="btn" href="/">Adopt Me</a> <!--route to application form -->
-              </div>
-            <% }) %>
-          </ul> 
+      <h2 class="heading">Application <span>Form</span></h2>
+
+      <form action="/application-form" method="GET">
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            required
+          />
         </div>
+        
+      
+      
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="Search Cat Type"
+            name="type"
+            required
+          />
+        </div>
+        
+      
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="Search Cat by affectionLevel"
+            name="ability"
+            required
+          />
+        </div>
+        <input type="submit" value="Find Cat" class="btn" />
+      </form>
     </section>
-</body>
+  </body>
 </html>
+

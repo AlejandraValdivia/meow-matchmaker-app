@@ -38,20 +38,32 @@
   </header>
     
     <section class="contact" id="contact">
-      <h2 class="heading">Welcome to your <span>Profile!</span></h2>
-      <div class="about" id="about">
-        
+        <h2 class="heading">Welcome to your <span>Profile!</span></h2>
             <div class="input-box">
-              <div class="about-img">
-                <img src="https://i.imgur.com/6WWb0la.jpeg" alt="" />
-              </div>
-              <div class="about-text"> 
-                <h3>Name <span><%= name %>!</h3>
-                <h3>Email <span><%= email %>! </h3>
-                <h3>Phone <span><%= phone %>! </h3>
-              </div>
+                <h3>Name <span><%= name %></h3>
+                <h3>Email <span><%= email %> </h3>
+                <h3>Phone <span><%= phone %> </h3>
             </div>
-          </div>
     </section>
+    <div class=""home-content>
+      <h2>Cats</h2>
+      <ul>
+        <% cats.forEach(cat => { %>
+          <div>
+            <li><a href="/cats/<%= cat._id %>"><%= cat.name %></a></li>
+            <img src="<%= cat.image %>" alt="">
+            <p><%= cat.description %></p>
+            <p><%= cat.age %></p>
+            <p><%= cat.origin %></p>
+            <p><%= cat.affectionLevel %></p>
+          </div>
+         
+
+        <% }) %>
+      </ul>
+      <a href="/">Adopt Me</a>
+     
+      
+    </div>
 </body>
 </html>

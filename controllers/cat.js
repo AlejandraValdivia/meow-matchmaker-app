@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
         id: response.data.id,
         color: response.data.color,
         links: response.data.links,
-        user: response.data.user,
+        
         
       };
       res.render("home", { unsplash: unsplashObj });
@@ -57,7 +57,7 @@ app.get("/", (req, res) => {
 });
 
 const passport = require('../config/passport-config');
-const axios = require('axios');
+
 const isLoggedIn = require('../middleware/isLoggedIn');
 
 // import Cat model
@@ -85,10 +85,10 @@ router.get('/cats', (req, res) => {
                     
                 }
                 // push inside array
-                catArray.push(pokemonObject); // 4
+                catArray.push(catObject); // 4
                 if (catArray.length === 20) {
                     console.log(catArray);
-                    res.render('pokemon/index', { catArray: catArray });
+                    res.render('cats', { catArray: catArray });
                 }
             })
             .catch(error => console.log('--- ERROR ---\n', error));
@@ -114,5 +114,17 @@ router.get('/search', isLoggedIn, (req, res) => {
     res.render('cat/search', {});
 });
 
+router.get('/:id', isLoggedIn, (req, res) => {
+    const { id } = req.params;
+    Cat.findById(id)
+        .then(cat => {
+            res.render('cat/show', { cat });
+        })
+        .catch(error => console.log('--- ERROR ---\n', error));
+});
+
+router.get('/results', isLoggedIn, (req, res) => {
+    res.render('cat/results', {});
+});
 
 module.exports = router;

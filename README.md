@@ -58,6 +58,23 @@ Commit your changes: git commit -m 'Add some feature'
 Push to the branch: git push origin feature/YourFeature
 Open a pull request.
 
+## Installation Instructions
+1.- Fork the repository
+2.- Clone the repository to your local machine
+3.- Install the following packages:
+   - npm install
+   - npm install express
+   - npm install express-session
+   - npm install method-override
+   - npm install axios
+   - npm install mongoose
+   - npm install mongodb
+   - npm install ejs
+   - npm install dotenv
+   
+
+
+
 ## Wireframe
 
 ![wireframe](public/assets/img/meow-app-blue-v2.jpg)
@@ -76,10 +93,11 @@ Open a pull request.
 - id
 - name
 - image
-- age
-- breed
-- status
 - description
+- age
+- origin
+- afectionLevel
+
 
 ### Post
 

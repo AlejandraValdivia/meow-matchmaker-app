@@ -64,24 +64,6 @@ section {
    cursor: default;
 }
 
-/* .navbar a {
-   font-size: 14px;
-   color: var(--text-color);
-   margin-left: 64px;
-   transition: 0.3s ease;
-}
-
-.navbar a:hover,
-.navbar a.active {
-   color: var(--main-color);
-}
-
-#menu-icon {
-   font-size: 3.6rem;
-   color: var(--text-color);
-   display: none;
-} */
-
 .home {
    display: flex;
    justify-content: center;
@@ -193,12 +175,11 @@ span {
 .about-content h3 {
    font-size: 2.6rem;
    color: var(--black-text-color);
-   
 }
 
 .about-content p {
    font-size: 1.6rem;
-   margin: 2rem 0 3rem;
+   margin: 4rem 0 3rem;
    color: var(--black-text-color);
 }
 
@@ -347,7 +328,7 @@ span {
    width: 100%;
    padding: 1.5rem;
    font-size: 1.6rem;
-   color: var(--text-color);
+   color: var(#303030);
    background: var(--second-bg-color);
    border-radius: 0.8rem;
    margin: 0.7rem 0;
@@ -447,28 +428,6 @@ span {
 }
 
 @media (max-width: 768px) {
-   /* #menu-icon {
-       display: block;
-   }
-   .navbar {
-       position: absolute;
-       top: 100%;
-       left: 0;
-       width: 100%;
-       padding: 1rem 3%;
-       background-color: var(--bg-color);
-       border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
-       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-       display: none;
-   }
-   .navbar.active {
-       display: block;
-   }
-   .navbar a {
-       display: block;
-       font-size: 2rem;
-       margin: 3rem 0;
-   } */
    .home {
        flex-direction: column;
    }
@@ -483,11 +442,11 @@ span {
        margin-top: 4rem;
    }
    .about {
-       flex-direction: column-reverse;
+       flex-direction: column;
    }
    .about img {
-       width: 70vw;
-       margin-top: 4rem;
+       width: 40vw;
+       margin-top: -4rem;
    }
    .services h2 {
        margin-bottom: 3rem;
@@ -532,12 +491,28 @@ span {
    }
 }
 
-/* nav ul li {
-  text-decoration: none;
-  display: inline-block;
-  margin-right: .3em;
-} */
-
 h1 {
   color: var(--second-color);
+}
+
+section span {
+   color: white;
+}
+
+@media (min-width: 992px) {
+   /* .about {
+      display: flow;
+   } */
+   .about-img img {
+      width: 20vw;
+      /* margin-left: 5rem; */
+   }
+   /* .about-text h3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      width: 70%;
+      padding: 2rem 0;
+   } */
 }
