@@ -353,6 +353,8 @@ body {
   margin-top: 100px;
   background-color: #ffffff;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-links {
@@ -378,6 +380,7 @@ body {
 
 .footer-social i {
   margin: 0 6px;
+  font-size: 3rem;
 }
 
 .footer-copyright {

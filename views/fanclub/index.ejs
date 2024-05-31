@@ -6,29 +6,112 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Hometown News</title>
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
       href="https://fonts.googleapis.com/css?family=Crete+Round|Open+Sans:400,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="fan-club.css" />
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/fan-club.css" />
     <script
       src="https://kit.fontawesome.com/9faec82d34.js"
       crossorigin="anonymous"
     ></script>
   </head>
-  <body class="home">
-    <header class="menu">
-      <h1 class="logo">
-        <img class="logo__mark" src="/images/logo.svg" alt="HomeTown Mark" />
-        <img class="logo__name" src="/images/name.svg" alt="HomeTown Name" />
-      </h1>
-      <ul class="nav">
-        <li><a href="/">News</a></li>
-        <li><a href="/gallery.html">Gallery</a></li>
-        <li><a href="/event.html">Submit An Event</a></li>
-      </ul>
+  <% console.log('---- MESSAGES ------', alerts.success) %> <% if
+    (alerts.success) { %> <% alerts.success.forEach(msg => { %>
+
+    <div class="alert alert-success"><%= msg %></div>
+    <% }) %> 
+    <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
+    %>
+    <div class="alert alert-danger"><%= msg %></div>
+    <% }) %> <% } %> 
+
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
+              alt="Bootstrap"
+              width="30"
+              height="24"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown link
+                </a>
+                <ul class="dropdown-menu">
+                  <% if(!currentUser) { %>
+                  <li>
+                    <a class="dropdown-item" href="/auth/signup">Signup</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/auth/login">Login</a></li>
+                  <% } else { %>
+                  <li>
+                    <a class="dropdown-item" href="/auth/logout">Logout</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/cats">Cats</a></li>
+                  <% } %>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
+  <body class="home">
+    <div >
+      <h1>
+      </h1>
+      <ul>
+        <li></li>
+        <li>></li>
+        <li></li>
+      </ul>
+    </div>
     <section class="headliners">
-      <img src="/images/headliner-01.jpg" alt="" class="headliner-one__img" />
+      <img src="https://i.imgur.com/ZmcYXQK.jpeg" alt="" class="headliner-one__img" />
       <div class="headliner__details headliner-one__info">
         <div class="category category--headliner category--breaking">
           <p>Breaking</p>
@@ -42,11 +125,11 @@
           local ASPCA board. When asked for a comment, Chester slowly walked
           away, stopped, turned back to us, then kept walking.
         </p>
-        <a class="headliner__link" href="">Read More...</a>
+        <a class="headliner__link" href="/posts">Read More...</a>
       </div>
       <div class="headliner__details headliner-two">
         <div class="headliner__img-wrapper">
-          <img src="/images/headliner-02.jpg" alt="" class="headliner__img" />
+          <img src="https://i.imgur.com/35QDIiF.jpeg" alt="" class="headliner__img" />
           <div class="category category--headliner category--events">
             <p>Events</p>
           </div>
@@ -57,7 +140,7 @@
       </div>
       <div class="headliner__details headliner-three">
         <div class="headliner__img-wrapper">
-          <img src="/images/headliner-03.jpg" alt="" class="headliner__img" />
+          <img src="https://i.imgur.com/wYTCtRu.jpeg" alt="" class="headliner__img" />
           <div class="category category--headliner category--community">
             <p>Community</p>
           </div>
@@ -67,7 +150,7 @@
     </section>
     <section class="articles">
       <div class="article">
-        <img class="article__img" src="/images/article-01.jpg" alt="" />
+        <img class="article__img" src="https://i.imgur.com/0LINzxs.jpeg" alt="" />
         <div class="category category--article category--politics">
           <p>Politics</p>
         </div>
@@ -79,11 +162,11 @@
             The mayors of Hometown and Statesville have been awarded a grant to
             build and connect a high-speed rail between the towns.
           </p>
-          <a class="article__link" href="">Read More...</a>
+          <a class="article__link" href="/posts">Read More...</a>
         </div>
       </div>
       <div class="article">
-        <img class="article__img" src="/images/article-02.jpg" alt="" />
+        <img class="article__img" src="https://i.imgur.com/xGmX4h3.jpeg" alt="" />
         <div class="article__info">
           <div class="category category--article category--events">
             <p>Events</p>
@@ -96,11 +179,11 @@
             with a few Hometown County neighbors! Check out local road trip
             meetups here.
           </p>
-          <a class="article__link" href="">Read More...</a>
+          <a class="article__link" href="/posts">Read More...</a>
         </div>
       </div>
       <div class="article">
-        <img class="article__img" src="/images/article-03.jpg" alt="" />
+        <img class="article__img" src="https://i.imgur.com/wkqgWyO.jpeg" alt="" />
         <div class="article__info">
           <div class="category category--article category--sports">
             <p>Sports</p>
@@ -111,11 +194,11 @@
             Country Village. This is the third win for the Hawks, giving them a
             chance at going to State. Ca-caw!
           </p>
-          <a class="article__link" href="">Read More...</a>
+          <a class="article__link" href="/posts">Read More...</a>
         </div>
       </div>
       <div class="article">
-        <img class="article__img" src="/images/article-04.jpg" alt="" />
+        <img class="article__img" src="https://i.imgur.com/PAHiKxN.jpeg" alt="" />
         <div class="article__info">
           <div class="category category--article category--community">
             <p>Community</p>
@@ -127,11 +210,11 @@
             As dog ownership skyrockets in Hometown and across the country,
             restaurants are expanding their dog-friendly areas to meet demand.
           </p>
-          <a class="article__link" href="">Read More...</a>
+          <a class="article__link" href="/posts">Read More...</a>
         </div>
       </div>
       <div class="article">
-        <img class="article__img" src="/images/article-05.jpg" alt="" />
+        <img class="article__img" src="https://anyimage.io/storage/uploads/a4bd060acc06b7af34378f074ff717e9" alt="" />
         <div class="article__info">
           <div class="category category--article category--politics">
             <p>Politics</p>
@@ -144,11 +227,11 @@
             at this municipal election, approving some measures and turning down
             an unpopular ban on chewing gum.
           </p>
-          <a class="article__link" href="">Read More...</a>
+          <a class="article__link" href="/posts">Read More...</a>
         </div>
       </div>
       <div class="article">
-        <img class="article__img" src="/images/article-06.jpg" alt="" />
+        <img class="article__img" src="https://i.imgur.com/CvzrNJL.png" alt="" />
         <div class="article__info">
           <div class="category category--article category--community">
             <p>Community</p>
@@ -160,7 +243,7 @@
             Funds to renovate and modernize the public library finally obtained
             voter approval. Construction is expected to begin early next year.
           </p>
-          <a class="article__link" href="">Read More...</a>
+          <a class="article__link" href="/posts">Read More...</a>
         </div>
       </div>
     </section>
@@ -216,7 +299,7 @@
         </li>
       </ul>
       <div class="ad">
-        <img src="/images/ad.jpg" alt="Guppies Ad" />
+        <img src="https://i.imgur.com/uvFEcJN.jpeg" alt="Guppies Ad" />
       </div>
     </section>
     <section class="callout">
@@ -227,21 +310,21 @@
           </div>
           <h3 class="callout-item__title">3-Day Weather Forcast</h3>
           <div class="day">
-            <img src="/images/monday.svg" alt="Sunny" class="day__icon" />
+            <img src="https://i.imgur.com/eTxzk46.jpeg" alt="Sunny" class="day__icon" />
             <div class="day__info">
               <p class="day__name">Monday</p>
               <p class="day__details">Sunny, Highs In The 70s</p>
             </div>
           </div>
           <div class="day">
-            <img src="/images/tuesday.svg" alt="Sunny" class="day__icon" />
+            <img src="https://i.imgur.com/xGmX4h3.jpeg" alt="Sunny" class="day__icon" />
             <div class="day__info">
               <p class="day__name">Tuesday</p>
               <p class="day__details">Partly Cloudy, Highs In The 60s</p>
             </div>
           </div>
           <div class="day">
-            <img src="/images/wednesday.svg" alt="Sunny" class="day__icon" />
+            <img src="https://i.imgur.com/iuHIpt3.jpeg" alt="Sunny" class="day__icon" />
             <div class="day__info">
               <p class="day__name">Wednesday</p>
               <p class="day__details">20% Chance Of Rain, Highs In The 70s</p>
@@ -264,7 +347,7 @@
             Geraldine retired from Hometown Hospital, they serve up dozens of
             her famous cookie types. Yum-o!
           </p>
-          <a class="article__link" href="">Read More...</a>
+          <a class="article__link" href="/posts">Read More...</a>
         </div>
         <div class="callout-item__img">
           <img src="/images/cookie.jpg" alt="Weather" />
@@ -277,20 +360,20 @@
           <p class="footer-heading"><strong>News Topics</strong></p>
           <p class="footer-link">Breaking</p>
           <p class="footer-link">Events</p>
-          <p class="footer-link">Politics</p>
+          <p class="footer-link">Treats</p>
           <p class="footer-link">Sports</p>
           <p class="footer-link">Community</p>
           <p class="footer-link">Best Picks</p>
-          <p class="footer-link">Weather</p>
+          <p class="footer-link">Tips for Enrichment</p>
         </div>
         <div class="footer-link-list">
-          <p class="footer-heading"><strong>Community</strong></p>
+          <p class="footer-heading"><strong>Join our Community</strong></p>
           <p class="footer-link">Breaking</p>
           <p class="footer-link">Events</p>
           <div class="footer-social">
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-instagram"></i>
+            <a href="https://github.com/AlejandraValdivia"><i class='bx bxl-github'></i></a>
+            <a href="https://www.linkedin.com/in/alejandra-valdivia/"><i class='bx bxl-linkedin-square' ></i></a>
+            <a href="https://www.instagram.com/hyperlinkwebca/"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
         <div class="footer-link-list">
@@ -304,5 +387,19 @@
       </div>
       <p class="footer-copyright">Copyright Hometown News 202X</p>
     </footer>
+    <!-- scroll reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- typed js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

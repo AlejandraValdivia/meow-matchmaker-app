@@ -14,13 +14,13 @@ const CAT_API_KEY = process.env.CAT_API_KEY;
 // import model
 const { User } = require("./models");
 //test model
-User.find({})
-.then(user => console.log('--User--', user));
- 
+User.find({}).then((user) => console.log("--User--", user));
+
 const { Cat } = require("./models");
-const { post } = require("./controllers/auth");
-Cat.find({})
- .then(cat => console.log('--Cat--', cat));
+const {Post } = require("./models");
+const { Comment } = require("./models");
+const { Friend } = require("./models");
+Cat.find({}).then((cat) => console.log("--Cat--", cat));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 // --------------------- Controllers ---------------------
 // Home page
 app.get("/", (req, res) => {
-  res.render("home", { });
+  res.render("home", {});
 });
 
 app.get("/cats", async (req, res) => {
@@ -64,9 +64,9 @@ app.get("/cats", async (req, res) => {
       }
     );
     const catsArray = [];
-    
+
     console.log("---- RESPONSE ----", response.data); // array of objects
-   // show the results
+    // show the results
     // what do we need
     // name
     for (let i = 0; i < response.data.length; i++) {
@@ -74,16 +74,17 @@ app.get("/cats", async (req, res) => {
       console.log(catData);
       // create an object
       const catObject = {
+        id: catData.id,
         name: catData.name,
         image: catData.image.url,
         description: catData.description,
         age: catData.life_span,
         origin: catData.origin,
-        affectionLevel: catData.affection_level
+        affectionLevel: catData.affection_level,
       };
       catsArray.push(catObject);
     }
-    
+
     console.log(catsArray);
     res.render("cats/index", { cats: catsArray });
   } catch (error) {
@@ -92,14 +93,16 @@ app.get("/cats", async (req, res) => {
 });
 
 app.get("/fanclub", function (req, res) {
-    res.render("fanclub/index", { name, email, User, username });
+  res.render("fanclub/index", {  User, Cat, Post, Comment, Friend });
 });
 
-app.get("/application", function (req, res) {
-res.render("application/index", { name, email, User, username });
+app.get('/posts', function (req, res) {
+  res.render("posts", {  User, Cat, Post, Comment, Friend });
 });
 
-
+app.post('/posts', function (req, res) {
+  res.render("posts", {  User, Cat, Post, Comment, Friend });
+})
 
 // app.get('/images/search', (req, res) => {
 //     axios
@@ -129,29 +132,35 @@ res.render("application/index", { name, email, User, username });
 // });
 
 // import auth routes
-app.use('/auth', require('./controllers/auth'));
-app.use('/cat', require('./controllers/cat'));
+app.use("/auth", require("./controllers/auth"));
+app.use("/cat", require("./controllers/cat"));
 // app.use('/', require('./controllers/cat'));
 
-// --- AUTHENTICATED ROUTE: go to user profile page --- 
-app.get('/profile', isLoggedIn, (req, res) => {
-    const { name, email, phone } = req.user;
-    res.render('profile', { name, email, phone });
+// --- AUTHENTICATED ROUTE: go to user profile page ---
+app.get("/profile", isLoggedIn, (req, res) => {
+  const { name, email, phone } = req.user;
+  res.render("profile", { name, email, phone });
 });
 
-app.get('/application-form', (req, res) => {
-    const { name, email, phone } = req.user;
-    res.render('application-form', { name, email, phone });
+app.get("/application-form", (req, res) => {
+  const { name, email, phone } = req.params;
+  res.render("application-form", { name, email, phone });
 });
 
-app.post('/application-form', (req, res) => {
-    const { name, email, phone } = req.user;
-    res.render('application-form', { name, email, phone });
+app.post("/application-form", (req, res) => {
+  const { name, email, phone } = req.user;
+  res.render("application-form", { name, email, phone });
 });
 
-app.get('/dashboard', (req, res) => {
-    const { User, Cat, Post, Comment, Friend } = req.body;
-    res.render('dashboard', { User, Cat, Post, Comment, Friend });
+app.get("/dashboard", (req, res) => {
+  const { User, Cat, Post, Comment, Friend } = req.body;
+  res.render("dashboard", { User, Cat, Post, Comment, Friend });
+});
+
+// LEARN MORE CONTROLLERS
+app.get("/learn-more", (req, res) => {
+  const { User, Cat, Post, Comment, Friend } = req.body;
+  res.render("learn-more", { User, Cat, Post, Comment, Friend });
 });
 
 // any authenticated route will need to have isLoggedIn before controller
@@ -161,120 +170,126 @@ app.get('/dashboard', (req, res) => {
 // });
 
 // CAT CONTROLLERS
-// app.get('/cat', isLoggedIn, (req, res) => {
-//     res.render('cat/index', {});
-// });
+app.get("/cats", isLoggedIn, async (req, res) => {
+    try {
+        const cats = await Cat.find();
+        res.render("cats/index", { cats });
+    } catch (error) {
+        console.log(error);
+    }
+});
+ 
+// Route to show details of a single cat
+app.get('/cats/:id', isLoggedIn, async (req, res) => {
+  const { id, name, image, description, age, origin, affectionLevel } = req.body;
+  console.log('---- req.body -----\n', req.body);
+  const cat = await Cat.findById(id);
+  res.render('cats/show', { id, name, image, description, age, origin, affectionLevel, cat });
+});
 
-// app.get('/cat/search', isLoggedIn, (req, res) => {
-//     res.render('cat/search', {});
-// });
-
-// app.delete('/cat/:id', isLoggedIn, (req, res) => {
-//     res.render('cat/edit', {});
-// });
-
+// Route to the fan club
+app.get("/fanclub", (req, res) => {
+  const { User, Cat, Post, Comment, Friend } = req.body;
+  res.render("fanclub/index", { User, Cat, Post, Comment, Friend });
+})
 // POST CONTROLLERS
-app.get('/post', (req, res) => {
-    res.render('post/index', { });
+app.get("/posts", (req, res) => {
+  const { User, Cat, Post, Comment, Friend } = req.body;
+  res.render("posts", { User, Cat, Post, Comment, Friend });
 });
 
-app.get('/post/new', (req, res) => {
-    res.render('post/new', {});
+app.get("/post/new", (req, res) => {
+  res.render("post/new", {});
 });
 
-app.get('/post/:id', (req, res) => {
-    res.render('post/show', {});
+app.get("/post/:id", (req, res) => {
+  res.render("post/show", {});
 });
 
-app.get('/post/:id/edit', (req, res) => {
-    res.render('post/edit', {});
+app.get("/post/:id/edit", (req, res) => {
+  res.render("post/edit", {});
 });
 
-app.put('/post/:id/edit', (req, res) => {
-    res.render('post/edit', {});
+app.put("/post/:id/edit", (req, res) => {
+  res.render("post/edit", {});
 });
 
-app.get('/post/search', (req, res) => {
-    res.render('post/search', {});
+app.get("/post/search", (req, res) => {
+  res.render("post/search", {});
 });
 
-app.delete('/post/:id', (req, res) => {
-    res.render('post/edit', {});
+app.delete("/post/:id", (req, res) => {
+  res.render("post/edit", {});
 });
 
-app.get('/post/:id/delete', (req, res) => {
-    res.render('post/edit', {});
+app.get("/post/:id/delete", (req, res) => {
+  res.render("post/edit", {});
 });
-app.get('/post/:id/like', (req, res) => {
-    res.render('post/edit', {});
+app.get("/post/:id/like", (req, res) => {
+  res.render("post/edit", {});
 });
-app.get('/post/:id/unlike', (req, res) => {
-    res.render('post/edit', {});
+app.get("/post/:id/unlike", (req, res) => {
+  res.render("post/edit", {});
 });
-app.get('/post/:id/comment', (req, res) => {
-    res.render('post/edit', {});
+app.get("/post/:id/comment", (req, res) => {
+  res.render("post/edit", {});
 });
-app.get('/post/:id/edit', (req, res) => {
-    res.render('post/edit', {});
+app.get("/post/:id/edit", (req, res) => {
+  res.render("post/edit", {});
 });
-app.put('/post/:id/edit', (req, res) => {
-    res.render('post/edit', {});
+app.put("/post/:id/edit", (req, res) => {
+  res.render("post/edit", {});
 });
-app.get('/post/:id/delete', (req, res) => {
-    res.render('post/edit', {});
-}
-);
+app.get("/post/:id/delete", (req, res) => {
+  res.render("post/edit", {});
+});
 // COMMENTS CONTROLLERS
-app.get('/comment', (req, res) => {
-    res.render('comment/index', { CommentController});
+app.get("/comment", (req, res) => {
+  const { User, Cat, Post, Comment, Friend } = req.body;
+  res.render("comment", { User, Cat, Post, Comment, Friend });
 });
 
-app.get('/comment/new', (req, res) => {
-    res.render('comment/new', { CommentController});
+app.get("/comment/new", (req, res) => {
+  res.render("comment/new", { CommentController });
 });
 
-app.get('/comment/:id', (req, res) => {
-    res.render('comment/show', { CommentController});
+app.get("/comment/:id", (req, res) => {
+  res.render("comment/show", { CommentController });
 });
 
-app.get('/comment/:id/edit', (req, res) => {
-    res.render('comment/edit', { CommentController});
+app.get("/comment/:id/edit", (req, res) => {
+  res.render("comment/edit", { CommentController });
 });
 
-app.put('/comment/:id/edit', (req, res) => {
-    res.render('comment/edit', { CommentController});
+app.put("/comment/:id/edit", (req, res) => {
+  res.render("comment/edit", { CommentController });
 });
 
-app.get('/comment/:id/delete', (req, res) => {
-    res.render('comment/edit', {});
+app.get("/comment/:id/delete", (req, res) => {
+  res.render("comment/edit", {});
 });
 
-app.get('/comment/:id/like', (req, res) => {
-    res.render('comment/edit', {});
+app.get("/comment/:id/like", (req, res) => {
+  res.render("comment/edit", {});
 });
 
-app.get('/comment/:id/unlike', (req, res) => {
-    res.render('comment/edit', {});
+app.get("/comment/:id/unlike", (req, res) => {
+  res.render("comment/edit", {});
 });
 
-app.get('/comment/:id/comment', (req, res) => {
-    res.render('comment/edit', {});
+app.get("/comment/:id/comment", (req, res) => {
+  res.render("comment/edit", {});
 });
 
-app.get('/comment/:id/edit', (req, res) => {
-    res.render('comment/edit', {});
+app.get("/comment/:id/edit", (req, res) => {
+  res.render("comment/edit", {});
 });
-app.put('/comment/:id/edit', (req, res) => {
-    res.render('comment/edit', {});
+app.put("/comment/:id/edit", (req, res) => {
+  res.render("comment/edit", {});
 });
-app.get('/comment/:id/delete', (req, res) => {
-    res.render('comment/edit', {});
+app.get("/comment/:id/delete", (req, res) => {
+  res.render("comment/edit", {});
 });
-
-
-
-
-
 
 // -------------- UNCOMMENT BELOW TO get random photo
 // app.get("/unsplash-api-test", (req, res) => {
@@ -290,22 +305,22 @@ app.get('/comment/:id/delete', (req, res) => {
 //     })
 //     .then((response) => {
 //       res.json(response.data);
-      // const catObj = {
-      //   name: response.data.name,
-      //   url: response.data.urls.regular,
-      //   description: response.data.description,
-      //   id: response.data.id,
-      //   color: response.data.color,
-      //   links: response.data.links,
-      //   user: response.data.user,
-      //   location: response.data.location,
-      // };
-      // res.render("cats", { cats: catObj });
-      // console.log("----cats data:\n", catObj);
-      //     })
-      //     .catch((error) => {
-      //       console.log("Error:", error);
-      //res.status(500).send("Error fetching random photo");
+// const catObj = {
+//   name: response.data.name,
+//   url: response.data.urls.regular,
+//   description: response.data.description,
+//   id: response.data.id,
+//   color: response.data.color,
+//   links: response.data.links,
+//   user: response.data.user,
+//   location: response.data.location,
+// };
+// res.render("cats", { cats: catObj });
+// console.log("----cats data:\n", catObj);
+//     })
+//     .catch((error) => {
+//       console.log("Error:", error);
+//res.status(500).send("Error fetching random photo");
 //     });
 // });
 
