@@ -1,0 +1,204 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Share your event | Meow Matchmaker App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/fan-club.css" />
+  </head>
+  <body>
+   <% console.log('---- MESSAGES ------', alerts.success) %> <% if
+    (alerts.success) { %> <% alerts.success.forEach(msg => { %>
+
+    <div class="alert alert-success"><%= msg %></div>
+    <% }) %> 
+    <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
+    %>
+    <div class="alert alert-danger"><%= msg %></div>
+    <% }) %> <% } %> 
+
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img
+              src="https://picsvg.com/svg/ta7LWHc.jpg"
+              alt="Bootstrap"
+              width="30"
+              height="24"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dashboard
+                </a>
+                <ul class="dropdown-menu">
+                  <% if(!currentUser) { %>
+                  <li>
+                    <a class="dropdown-item" href="/auth/signup">Signup</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/auth/login">Login</a></li>
+                  <% } else { %>
+                  <li>
+                    <a class="dropdown-item" href="/auth/logout">Logout</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/cats">Cats</a></li>
+                  <li><a class="dropdown-item" href="/application-form">Services</a></li>
+                  <li><a class="dropdown-item" href="/fanclub">Join Our Fan Club</a></li>
+                  <li><a class="dropdown-item" href="/learn-more">Learn More</a></li>
+                  <% } %>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  <body>
+    
+    <section class="event">
+      <div class="event__heading">
+        <p class="event__subtitle">Submit An Event</p>
+        <h2 class="event__title">Let us know about your Event!</h2>
+      </div>
+      <form action="/event" class="event-form" method="POST">
+        <div class="event-form__info">
+          <div class="event-form__field">
+            <label class="event-form__label" for="name"
+              ><p class="event-form__label-question">Full Name</p>
+            </label>
+            <input type="text" placeholder="Full Name" name="name" class="event-form__input" required/>
+          </div>
+          <div class="event-form__field">
+            <label class="event-form__label" for="email"
+              ><p class="event-form__label-question">Email Address</p>
+            </label>
+            <input type="text" placeholder="Email"   id="email" class="event-form__input" required/>
+          </div>
+          <div class="event-form__field">
+            <label class="event-form__label" for="phone"
+              ><p class="event-form__label-question">Phone Number</p>
+            </label>
+            <input type="text" placeholder="Phone Number" id="phone" class="event-form__input" required/>
+          </div>
+          <div class="event-form__field">
+            <label class="event-form__label" for="date"
+              ><p class="event-form__label-question">Date</p>
+            </label>
+            <input type="date"  
+           name="begin" 
+           placeholder="dd-mm-yyyy" 
+           value="" 
+           min="2024-05-31" 
+           max="2030-12-31" id="date" class="event-form__input" required/>
+          </div>
+          <div class="event-form__field">
+            <label class="event-form__label" for="location"
+              ><p class="event-form__label-question">
+                Location ( City, State )
+              </p>
+            </label>
+            <input type="text" placeholder="Location" id="location" class="event-form__input" required/>
+          </div>
+        </div>
+        <div class="event-form__tip">
+          <div class="event-form__field">
+            <label class="event-form__label" for="tip"
+              ><p class="event-form__label-question">Description of Event:</p>
+            </label>
+            <textarea placeholder="Tell us about your event!" class="event-form__input" name="tip" id="tip" required></textarea>
+          </div>
+          <input
+            class="event-form__submit"
+            type="submit"
+            value="Submit Your Tip"
+          />
+        </div>
+      </form>
+    </section>
+    <footer class="footer">
+      <div class="footer-links">
+        <div class="footer-link-list">
+          <p class="footer-heading"><strong>News Topics</strong></p>
+          <p class="footer-link">Breaking</p>
+          <p class="footer-link">Events</p>
+          <p class="footer-link">Politics</p>
+          <p class="footer-link">Sports</p>
+          <p class="footer-link">Community</p>
+          <p class="footer-link">Best Picks</p>
+          <p class="footer-link">Weather</p>
+        </div>
+        <div class="footer-link-list">
+          <p class="footer-heading"><strong>Community</strong></p>
+          <p class="footer-link">Breaking</p>
+          <p class="footer-link">Events</p>
+          <div class="footer-social">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+          </div>
+        </div>
+        <div class="footer-link-list">
+          <p class="footer-heading"><strong>Hometown News</strong></p>
+          <p class="footer-link">Breaking</p>
+          <p class="footer-link">Events</p>
+          <p class="footer-link">Politics</p>
+          <p class="footer-link">Sports</p>
+          <p class="footer-link">Community</p>
+        </div>
+      </div>
+      <a href="https://github.com/AlejandraValdivia"><p class="footer-copyright">Copyright Alejandra Valdivia 2024</p></a>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -7,6 +7,7 @@ const typed = new Typed(".multiple-text", {
     "Love",
     "Adoration",
     "Friendship",
+    "Endless cuteness",
   ],
   typeSpeed: 100,
   backSpeed: 100,

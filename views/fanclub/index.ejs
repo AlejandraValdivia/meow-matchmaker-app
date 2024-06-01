@@ -20,14 +20,14 @@
       href="https://fonts.googleapis.com/css?family=Crete+Round|Open+Sans:400,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/fan-club.css" />
+    
+    <link rel="stylesheet" href="/css/fan-club.css" />
     <script
       src="https://kit.fontawesome.com/9faec82d34.js"
       crossorigin="anonymous"
     ></script>
   </head>
-  <% console.log('---- MESSAGES ------', alerts.success) %> <% if
+    <% if
     (alerts.success) { %> <% alerts.success.forEach(msg => { %>
 
     <div class="alert alert-success"><%= msg %></div>
@@ -100,17 +100,8 @@
         </div>
       </nav>
     </header>
-  <body class="home">
-    <div >
-      <h1>
-      </h1>
-      <ul>
-        <li></li>
-        <li>></li>
-        <li></li>
-      </ul>
-    </div>
-    <section class="headliners">
+  <body >
+    <section class="headliners home">
       <img src="https://i.imgur.com/ZmcYXQK.jpeg" alt="" class="headliner-one__img" />
       <div class="headliner__details headliner-one__info">
         <div class="category category--headliner category--breaking">
@@ -248,9 +239,9 @@
       </div>
     </section>
     <section class="sidebar">
-      <header class="top__header">
+      <div class="top__header">
         <p>Top 5 Articles</p>
-      </header>
+      </div>
       <ul class="top__list">
         <li class="top__item">
           <p class="top__item__number">1</p>
@@ -298,9 +289,71 @@
           </div>
         </li>
       </ul>
-      <div class="ad">
+      <div class="ad event">
+        <h3 class="event__title">Do you have an event coming up and want to share with us?</h3>
+        <p>Complete and submit this form and we'll be happy to share your 
+          event on our Fan Page</p>
         <img src="https://i.imgur.com/uvFEcJN.jpeg" alt="Guppies Ad" />
+      
+      <div class="event__heading">
+        <p class="event__subtitle">Submit An Event</p>
+        <h2 class="event__title">Let us know about your Event!</h2>
       </div>
+      <form action="/event" class="event-form" method="POST">
+        <div class="event-form__info">
+          <div class="event-form__field">
+            <label class="event-form__label" for="name"
+              ><p class="event-form__label-question">Full Name</p>
+            </label>
+            <input type="text" placeholder="Full Name" name="name" class="event-form__input" required/>
+          </div>
+          <div class="event-form__field">
+            <label class="event-form__label" for="email"
+              ><p class="event-form__label-question">Email Address</p>
+            </label>
+            <input type="text" placeholder="Email"   id="email" class="event-form__input" required/>
+          </div>
+          <div class="event-form__field">
+            <label class="event-form__label" for="phone"
+              ><p class="event-form__label-question">Phone Number</p>
+            </label>
+            <input type="text" placeholder="Phone Number" id="phone" class="event-form__input" required/>
+          </div>
+          <div class="event-form__field">
+            <label class="event-form__label" for="date"
+              ><p class="event-form__label-question">Date</p>
+            </label>
+            <input type="date"  
+           name="begin" 
+           placeholder="dd-mm-yyyy" 
+           value="" 
+           min="2024-05-31" 
+           max="2030-12-31" id="date" class="event-form__input" required/>
+          </div>
+          <div class="event-form__field">
+            <label class="event-form__label" for="location"
+              ><p class="event-form__label-question">
+                Location ( City, State )
+              </p>
+            </label>
+            <input type="text" placeholder="Location" id="location" class="event-form__input" required/>
+          </div>
+        </div>
+        <div class="event-form__tip">
+          <div class="event-form__field">
+            <label class="event-form__label" for="tip"
+              ><p class="event-form__label-question">Description of Event:</p>
+            </label>
+            <textarea placeholder="Tell us about your event!" class="event-form__input" name="tip" id="tip" required></textarea>
+          </div>
+          <input
+            class="event-form__submit"
+            type="submit"
+            value="Submit Your Tip"
+          />
+        </div>
+      </form>
+    </div>
     </section>
     <section class="callout">
       <div class="callout-item">
@@ -385,7 +438,7 @@
           <p class="footer-link">Community</p>
         </div>
       </div>
-      <p class="footer-copyright">Copyright Hometown News 202X</p>
+      <a href="https://github.com/AlejandraValdivia"><p class="footer-copyright">Copyright Alejandra Valdivia 2024</p></a>
     </footer>
     <!-- scroll reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>

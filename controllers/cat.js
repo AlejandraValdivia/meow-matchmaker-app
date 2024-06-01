@@ -23,16 +23,20 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 
 // import Cat model
 const { Cat } = require('../models');
-const { User } = require('../models');
-
 
 // ------ Routes -------
-router.get('/cats', isLoggedIn, (req, res) => {
-    res.render('cats/index', {});
-});
+// router.get('/cats', async (req, res) => {
+//     const cats = await Cat.find({});
+//     res.render('cats/index', { cats});
+// });
 
-// router.get('/cats/:id', (req, res) => {
-//     res.render('cats/show', {});
+// router.get('/cats/:id', async (req, res) => {
+//     const cat = await Cat.findById({ id: req.params.id });
+//     if (!cat) {
+//         req.flash('error', 'Cat not found');
+//         return res.redirect('/cats/index');
+//     }
+//     res.render('cats/show', { cat});
 // });
 
 
@@ -46,8 +50,8 @@ router.get('cats/:id', isLoggedIn, (req, res) => {
         .catch(error => console.log('--- ERROR ---\n', error));
 });
 
-router.get('/results', isLoggedIn, (req, res) => {
-    res.render('cats/results', {});
-});
+// router.get('/results', isLoggedIn, (req, res) => {
+//     res.render('cats/results', {});
+// });
 
 module.exports = router;

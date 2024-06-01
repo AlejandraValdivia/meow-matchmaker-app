@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const catSchema = new mongoose.Schema({
+    // id : { type: String, required: true },
     name: { type: String, required: true },
     description: { type: String, required: true},
     image: { type: String},
