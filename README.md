@@ -94,8 +94,8 @@ Open a pull request.
 - name
 - image
 - description
-- age
-- origin
+- age (life span)
+- origin (country of origin)
 - afectionLevel
 
 

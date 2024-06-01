@@ -1,15 +1,21 @@
-// sudo code goes here
+// const express = require("express");
+// const router = express.Router();
+// const passport = require("../config/passport-config");
 
-// API
-app.get('/user', isLoggedIn, (req, res) => {
-    User.findOne({ user_id: req.user._id });
-    res.render('profile', { name, email, phone, password });
-});
+// // import User model
+// const { User } = require("../models");
 
-app.get('/user/new', isLoggedIn, (req, res) => {
-    User.findOne({ user_id: req.user._id });
-    res.render('profile', { name, email, phone, password });
-});
+// // ======== GET ROUTES ===============
+// // User routes 
+// router.get('/user', isLoggedIn, (req, res) => {
+//     User.findOne({ user_id: req.user._id });
+//     res.render('profile', { name, email, phone, password });
+// });
+
+// router.get('/user/new', isLoggedIn, (req, res) => {
+//     User.findOne({ user_id: req.user._id });
+//     res.render('profile', { name, email, phone, password });
+// });
 
 
 

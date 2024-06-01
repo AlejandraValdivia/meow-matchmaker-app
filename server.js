@@ -13,14 +13,14 @@ const RAPID_API_KEY = process.env.RAPID_API_KEY;
 const CAT_API_KEY = process.env.CAT_API_KEY;
 // import model
 const { User } = require("./models");
-//test model
-User.find({}).then((user) => console.log("--User--", user));
-
 const { Cat } = require("./models");
 const { Post } = require("./models");
 const { Comment } = require("./models");
 const { Friend } = require("./models");
-Cat.find({}).then((cat) => console.log("--Cat--", cat));
+
+//test model
+// Cat.find({}).then((cat) => console.log("--Cat--", cat));
+// User.find({}).then((user) => console.log("--User--", user));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
@@ -65,14 +65,12 @@ app.get("/cats", async (req, res) => {
     );
     const catsArray = [];
 
-    console.log("---- RESPONSE ----", response.data); // array of objects
-    // show the results
-    // what do we need
-    // name
+    //console.log("---- RESPONSE ----", response.data); // array of objects
+
     for (let i = 0; i < response.data.length; i++) {
       const catData = response.data[i];
       console.log(catData);
-      // create an object
+     
       const catObject = {
         id: catData.id,
         name: catData.name,
@@ -85,7 +83,6 @@ app.get("/cats", async (req, res) => {
       catsArray.push(catObject);
     }
 
-    //console.log(catsArray);
     res.render("cats/index", { cats: catsArray });
   } catch (error) {
     console.error("----- ERROR in /api-test ------", error);
@@ -98,8 +95,9 @@ app.get("/fanclub", function (req, res) {
 
 // import auth routes
 app.use("/auth", require("./controllers/auth"));
-app.use("/cat", require("./controllers/cat"));
 // app.use('/', require('./controllers/cat'));
+// app.use("/cat", require("./controllers/cat"));
+
 
 // --- AUTHENTICATED ROUTE: go to user profile page ---
 app.get("/profile", isLoggedIn, (req, res) => {
@@ -135,39 +133,6 @@ app.get("/learn-more", (req, res) => {
 // });
 
 // CAT CONTROLLERS
-// app.get('/cats', async (req, res) => {
-//   const { User, Cat, Post, Comment, Friend } = req.body;
-//   res.render('cats/index', { Cat });
-// });
-app.get("/cats", async (req, res) => {
-  try {
-    const response = await axios.get(
-      `https://api.thecatapi.com/v1/breeds?limit=10&page=0`,
-      {
-        headers: {
-          accept: "application/json",
-          "x-api-key": CAT_API_KEY,
-        },
-      }
-    );
-    const catsArray = response.data.map((catData) => ({
-      _id: catData.id, // Ensure the property name matches the template
-      name: catData.name,
-      image: catData.image?.url || "", // Handle possible undefined image
-      description: catData.description,
-      age: catData.life_span,
-      origin: catData.origin,
-      affectionLevel: catData.affection_level,
-    }));
-
-    res.render("cats/index", { cats: catsArray });
-  } catch (error) {
-    console.error("----- ERROR in /cats route ------", error);
-    req.flash("error", "Failed to fetch cats");
-    res.redirect("/");
-  }
-});
-
 app.get("/cats/:id", async (req, res) => {
   const catId = req.params.id;
   try {
@@ -226,47 +191,57 @@ app.get("/cats/:id", async (req, res) => {
   }
 });
 
-// 404 error page
-app.get("/cats/results", async (req, res) => {
-  const catId = req.params.id;
-  try {
-    const foundCat = await Cat.findOne({ cat: req.params.id });
-    if (
-      foundCat._id &&
-      foundCat.name &&
-      foundCat.image &&
-      foundCat.description &&
-      foundCat.age &&
-      foundCat.origin &&
-      foundCat.affectionLevel
-    ) {
-      res.render("cats/results", { cat: foundCat });
-    } else {
-      axios
-        .get(`https://api.thecatapi.com/v1/breeds/${catId}`)
-        .then((response) => {
-          console.log(response);
-          const cat = {
-            _id: response.data.id,
-            name: response.data.name,
-            image: imageUrl,
-            description: response.data.description,
-            age: response.data.life_span,
-            origin: response.data.origin,
-            affectionLevel: response.data.affection_level,
-          };
-          res.render("cats/results", { cat });
-        })
-        .catch((error) => {
-          if (error.name === "AxiosError") {
-            return res.render("cats/no-results", {});
-          }
-        });
-    }
-  } catch (error) {
-    res.render("cats/no-results", {});
-  }
+// SEARCH CAT CONTROLLERS
+// Route to show the search form
+app.get('/search', (req, res) => {
+  res.render('search', { alerts: req.flash() });
 });
+
+app.get('/no-results', (req, res) => {
+  res.render('no-results', { alerts: req.flash() });
+});
+
+// Route to process the search form
+app.get('/search/results', async (req, res) => {
+  const { breed, origin, color } = req.query;
+  const apiUrl = `https://api.thecatapi.com/v1/breeds`;
+  if (!breed && !origin && !color) {
+    console.log('---EMPY FORM---');
+    req.flash('error', 'Please enter at least one search criteria');
+    return res.redirect('/no-results');
+  }
+
+  try {
+    const response = await axios.get(apiUrl, {
+      headers: { 'x-api-key': process.env.CAT_API_KEY }
+    });
+    let cats = response.data;
+
+    if (breed) {
+      cats = cats.filter(cat => cat.name.toLowerCase().includes(breed.toLowerCase()));
+    }
+    if (origin) {
+      cats = cats.filter(cat => cat.origin.toLowerCase().includes(origin.toLowerCase()));
+    }
+    if (color) {
+      cats = cats.filter(cat => cat.description.toLowerCase().includes(color.toLowerCase()));
+    }
+    if (cats.length === 0) {
+      req.flash('error', 'No results found for the given search criteria');
+      return res.redirect('/no-results');
+    }
+
+    res.render('results', { cats, alerts: req.flash() });
+  } catch (error) { 
+    console.error(error);
+    req.flash('error', 'Unable to fetch data from The Cat API');
+    res.redirect('/search');
+    }
+
+});
+
+
+
 
 // Route to the fan club
 app.get("/fanclub", (req, res) => {
@@ -378,8 +353,14 @@ app.get("/event", (req, res) => {
 
 // Contact Form
 app.get("/contact", (req, res) => {
-  const { name, email, password } = req.body;
-  res.render("contact", { name, email, password });
+  const { User } = req.body;
+  res.render("contact", { User }); 
+});
+
+//404 error page
+app.get("/*", (req, res) => {
+  console.log(req.params.error);
+  res.render("404", {});
 });
 
 // app.get('/images/search', (req, res) => {
