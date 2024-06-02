@@ -15,3 +15,33 @@ Cat.create({
   .catch((error) => {
     console.log("---- ERROR ----", error);
   });
+
+Cat.create({
+  name: "sarah",
+  origin: "canada",
+  image: "https://i.imgur.com/Ngkcwid.jpeg",
+  description: "white and puffy",
+  lifeSpan: "10",
+  affectionLevel: "5",
+})
+.then((user) => {
+  console.log("---- NEW CAT ----", cat);
+})
+.catch((error) => {
+  console.log("---- ERROR ----", error);
+});
+
+Cat.create({
+  name: "jack",
+  origin: "england",
+  image: "https://i.imgur.com/kGAHZGg.jpeg",
+  description: "brown and gray",
+  lifeSpan: "10",
+  affectionLevel: "5",
+})
+  .then((user) => {
+    console.log("---- NEW CAT ----", cat);
+  })
+  .catch((error) => {
+    console.log("---- ERROR ----", error);
+  });

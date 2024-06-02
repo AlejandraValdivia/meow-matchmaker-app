@@ -6,6 +6,11 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("./config/passport-config");
 const isLoggedIn = require("./middleware/isLoggedIn");
+const methodOverride = require('method-override');
+const mongoose = require("mongoose");
+app.use(methodOverride('_method'));
+// const { TheCatAPI } = require("@thatapicompany/thecatapi");
+
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
 const PORT = process.env.PORT || 3000;
@@ -19,11 +24,25 @@ const { Comment } = require("./models");
 const { Friend } = require("./models");
 
 //test model
-// Cat.find({}).then((cat) => console.log("--Cat--", cat));
-// User.find({}).then((user) => console.log("--User--", user));
+Cat.find({}).then((cat) => console.log("--Cat--", cat));
+User.find({}).then((user) => console.log("--User--", user));
+Post.find({}).then((post) => console.log("--Post--", post));
+Comment.find({}).then((comment) => console.log("--Comment--", comment));
+Friend.find({}).then((friend) => console.log("--Friend--", friend));
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/meow-matchmaker', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true, 
+}).then(() => {
+  console.log("Connected to MongoDB");
+}).catch(err => {
+  console.error("Failed to connect to MongoDB", err);
+});
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 app.use(express.static(__dirname + "/public"));
 app.use(
   session({
@@ -42,7 +61,7 @@ app.use(passport.session());
 app.use((req, res, next) => {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
-  next(); // going to said route
+  next(); 
 });
 
 // --------------------- Controllers ---------------------
@@ -69,7 +88,7 @@ app.get("/cats", async (req, res) => {
 
     for (let i = 0; i < response.data.length; i++) {
       const catData = response.data[i];
-      console.log(catData);
+      // console.log(catData);
      
       const catObject = {
         id: catData.id,
@@ -100,9 +119,25 @@ app.use("/auth", require("./controllers/auth"));
 
 
 // --- AUTHENTICATED ROUTE: go to user profile page ---
-app.get("/profile", isLoggedIn, (req, res) => {
+app.get('/profile', isLoggedIn, (req, res) => {
   const { name, email, phone } = req.user;
-  res.render("profile", { name, email, phone });
+  res.render('profile', { name, email, phone });
+});
+
+app.get("/profile/edit",  (req, res) => {
+  const user = req.user;
+  if (!user) {
+    req.flash('error', 'User not found');
+  }
+  res.render("profile/edit", { user, alerts: req.flash() });
+});
+
+app.get("/profile/delete",  (req, res) => {
+  const user = req.user;
+  if (!user) {
+    req.flash('error', 'User not found');
+  }
+  res.render("profile/delete", { user, alerts: req.flash() });
 });
 
 app.get("/application-form", (req, res) => {
@@ -116,8 +151,8 @@ app.post("/application-form", (req, res) => {
 });
 
 app.get("/dashboard", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("dashboard", { User, Cat, Post, Comment, Friend });
+  const { User } = req.body;
+  res.render("dashboard", { User });
 });
 
 // LEARN MORE CONTROLLERS
@@ -201,6 +236,7 @@ app.get('/no-results', (req, res) => {
   res.render('no-results', { alerts: req.flash() });
 });
 
+
 // Route to process the search form
 app.get('/search/results', async (req, res) => {
   const { breed, origin, color } = req.query;
@@ -240,60 +276,119 @@ app.get('/search/results', async (req, res) => {
 
 });
 
+// search by image
+app.get('/images/search', async (req, res) => {
+  const { image } = req.query;
+  if (!image) {
+    req.flash('error', 'Please enter an image URL');
+    return res.redirect('/no-results');
+  }
 
+  try {
+    const response = await axios.get(
+      `https://api.thecatapi.com/v1/images/search?limit=20&image_url=${encodeURIComponent(image)}`,
+      {
+        headers: {
+          accept: "application/json",
+          "x-api-key": process.env.CAT_API_KEY,
+        },
+      }
+    );
 
+    const images = response.data;
+
+    //console.log(images[0].url);
+
+    res.render('images/search', { images, alerts: req.flash() });
+  } catch (error) {
+    console.error(error);
+    req.flash('error', 'Unable to fetch data from The Cat API');
+    res.redirect('/search');
+  }
+});
+
+// 404 error page
+// app.get("*", (req, res) => {
+//   res.render("404", {});
+// });
 
 // Route to the fan club
 app.get("/fanclub", (req, res) => {
   const { User, Cat, Post, Comment, Friend } = req.body;
   res.render("fanclub/index", { User, Cat, Post, Comment, Friend });
 });
-// POST CONTROLLERS
-app.get("/post", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("post", { User, Cat, Post, Comment, Friend });
+
+// Route to the posts
+app.get('/posts', async (req, res) => {
+  try {
+    const posts = await Post.find({});
+    res.render('posts/index', { posts });
+  } catch (err) {
+    console.error('Error fetching posts:', err);
+    res.status(500).send('Server Error');
+  }
 });
 
-app.get("/post/new", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("post/new", { User, Cat, Post, Comment, Friend });
+app.get('/posts/new', (req, res) => {
+  res.render('posts/new');
 });
 
-app.get("/post/:id/edit", (req, res) => {
-  res.render("post/edit", {});
+app.post('/posts', async (req, res) => {
+  try {
+    const { title, content, username } = req.body;
+    const newPost = new Post({ title, content, username });
+    await newPost.save();
+    req.flash('success', 'Post created successfully');
+    res.redirect('/posts');
+  } catch (err) {
+    console.error('Error creating post:', err);
+    res.status(500).send('Server Error');
+  }
 });
 
-app.put("/post/:id/edit", (req, res) => {
-  res.render("post/edit", {});
+app.get('/posts/:id/edit', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.render('posts/edit', { post });
+  } catch (err) {
+    console.error('Error fetching post for edit:', err);
+    res.status(500).send('Server Error');
+  }
 });
 
-app.get("/post/search", (req, res) => {
-  res.render("post/search", {});
+app.put('/posts/:id', async (req, res) => {
+  try {
+    const { title, content, username } = req.body;
+    await Post.findByIdAndUpdate(req.params.id, { title, content, username });
+    req.flash('success', 'Post updated successfully');
+    res.redirect('/posts');
+  } catch (err) {
+    console.error('Error updating post:', err);
+    res.status(500).send('Server Error');
+  }
 });
 
-app.delete("/post/:id", (req, res) => {
-  res.render("post/edit", {});
+app.get('/posts/:id/delete', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.render('posts/delete', { post });
+  } catch (err) {
+    console.error('Error fetching post for delete:', err);
+    res.status(500).send('Server Error');
+  }
 });
 
-app.get("/post/:id/delete", (req, res) => {
-  res.render("post/edit", {});
+app.delete('/posts/:id', async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    req.flash('success', 'Post deleted successfully');
+    res.redirect('/posts');
+  } catch (err) {
+    console.error('Error deleting post:', err);
+    res.status(500).send('Server Error');
+  }
 });
 
-app.get("/post/:id/comment", (req, res) => {
-  res.render("post/edit", {});
-});
-
-app.get("/post/:id/edit", (req, res) => {
-  res.render("post/edit", {});
-});
-
-app.put("/post/:id/edit", (req, res) => {
-  res.render("post/edit", {});
-});
-
-app.get("/post/:id/delete", (req, res) => {
-  res.render("post/edit", {});
-});
 
 // COMMENTS CONTROLLERS
 app.get("/comment", (req, res) => {
@@ -353,14 +448,8 @@ app.get("/event", (req, res) => {
 
 // Contact Form
 app.get("/contact", (req, res) => {
-  const { User } = req.body;
-  res.render("contact", { User }); 
-});
-
-//404 error page
-app.get("/*", (req, res) => {
-  console.log(req.params.error);
-  res.render("404", {});
+  const { name, email, password } = req.body;
+  res.render("contact", { name, email, password });
 });
 
 // app.get('/images/search', (req, res) => {
@@ -373,7 +462,7 @@ app.get("/*", (req, res) => {
 //         }
 //         console.log(catImage);
 //         res.send(catImage);
-//         res.render('search', { catImage: catImage});
+//         res.render('images/search', { catImage: catImage});
 // })
 // .catch((err) => {
 //     console.error(err);

@@ -84,9 +84,12 @@ Open a pull request.
 ### User 👧🏽 👦🏻
 
 - id
-- username
+- name
 - email
+- username
 - password
+- image (optional)
+- phone number (optional)
 
 ### Cat
 
@@ -102,10 +105,10 @@ Open a pull request.
 ### Post
 
 - id
-- userId
+- username (author)
 - title
 - content
-- userId
+
 
 ### Comment
 

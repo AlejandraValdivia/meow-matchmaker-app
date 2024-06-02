@@ -34,3 +34,10 @@ User.find({})
 .catch(error => {
     console.log('---- ERROR ----', error);
 });
+
+User.create({ 
+    name: 'Frank',
+    email: 'frank@gmail.com',
+    phone: '111-222-3333',
+    password: 'hello',
+})

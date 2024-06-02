@@ -104,8 +104,16 @@ section {
   margin-bottom: 2rem;
 }
 
+h2 {
+  color: var(--text-color)
+}
+
 span {
   color: var(--second-color);
+}
+
+h2.black-heading {
+  color: var(--black-text-color);
 }
 
 .home-content h1 {
