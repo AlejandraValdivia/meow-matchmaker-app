@@ -8,14 +8,15 @@ const passport = require("./config/passport-config");
 const isLoggedIn = require("./middleware/isLoggedIn");
 const methodOverride = require('method-override');
 const mongoose = require("mongoose");
-app.use(methodOverride('_method'));
-// const { TheCatAPI } = require("@thatapicompany/thecatapi");
+
+const commentRoutes = require('./controllers/comment');
+const postRoutes = require('./controllers/posts');
+const catRoutes = require('./controllers/cats');
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
-const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
 const PORT = process.env.PORT || 3000;
-const RAPID_API_KEY = process.env.RAPID_API_KEY;
 const CAT_API_KEY = process.env.CAT_API_KEY;
+
 // import model
 const { User } = require("./models");
 const { Cat } = require("./models");
@@ -63,6 +64,18 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next(); 
 });
+
+// import auth routes
+app.use("/auth", require("./controllers/auth"));
+app.use('/', require('./controllers/cats'));
+// app.use("/cat", require("./controllers/cats"));
+// app.use("/users", require("./controllers/users"));
+// app.use("/posts", require("./controllers/posts"));
+// app.use("/comments", require("./controllers/comments"));
+// app.use("/friends", require("./controllers/friends"));
+
+// app.use("/posts", postRoutes);
+// app.use("/comments", commentRoutes);
 
 // --------------------- Controllers ---------------------
 // Home page
@@ -112,32 +125,44 @@ app.get("/fanclub", function (req, res) {
   res.render("fanclub/index", { User, Cat, Post, Comment, Friend });
 });
 
-// import auth routes
-app.use("/auth", require("./controllers/auth"));
-// app.use('/', require('./controllers/cat'));
-// app.use("/cat", require("./controllers/cat"));
-
 
 // --- AUTHENTICATED ROUTE: go to user profile page ---
+// Profile Routes
 app.get('/profile', isLoggedIn, (req, res) => {
   const { name, email, phone } = req.user;
   res.render('profile', { name, email, phone });
 });
 
-app.get("/profile/edit",  (req, res) => {
+app.get('/profile/edit', isLoggedIn, (req, res) => {
   const user = req.user;
   if (!user) {
     req.flash('error', 'User not found');
+    return res.redirect('/profile');
   }
-  res.render("profile/edit", { user, alerts: req.flash() });
+  res.render('profile/edit', { user });
 });
 
-app.get("/profile/delete",  (req, res) => {
+app.get('/profile/delete', isLoggedIn, (req, res) => {
   const user = req.user;
   if (!user) {
     req.flash('error', 'User not found');
+    return res.redirect('/profile');
   }
-  res.render("profile/delete", { user, alerts: req.flash() });
+  res.render('profile/delete', { user });
+});
+
+// Route to handle profile update
+app.put('/profile', isLoggedIn, async (req, res) => {
+  try {
+    const { name, email, phone } = req.body;
+    const user = await User.findByIdAndUpdate(req.user._id, { name, email, phone }, { new: true });
+    req.flash('success', 'Profile updated successfully');
+    res.redirect('/profile');
+  } catch (err) {
+    console.error('Error updating profile:', err);
+    req.flash('error', 'Could not update profile');
+    res.redirect('/profile/edit');
+  }
 });
 
 app.get("/application-form", (req, res) => {
@@ -160,12 +185,6 @@ app.get("/learn-more", (req, res) => {
   const { User, Cat, Post, Comment, Friend } = req.body;
   res.render("learn-more", { User, Cat, Post, Comment, Friend });
 });
-
-// any authenticated route will need to have isLoggedIn before controller
-// app.get('/pokemon', isLoggedIn, (req, res) => {
-//      get data
-//      render page + send data to page
-// });
 
 // CAT CONTROLLERS
 app.get("/cats/:id", async (req, res) => {
@@ -276,52 +295,12 @@ app.get('/search/results', async (req, res) => {
 
 });
 
-// search by image
-app.get('/images/search', async (req, res) => {
-  const { image } = req.query;
-  if (!image) {
-    req.flash('error', 'Please enter an image URL');
-    return res.redirect('/no-results');
-  }
-
+// ======== GET ROUTES ===============
+// All posts
+app.get('/posts', isLoggedIn, async (req, res) => {
+  console.log('---- POSTS ----', req.body.currentUser);
   try {
-    const response = await axios.get(
-      `https://api.thecatapi.com/v1/images/search?limit=20&image_url=${encodeURIComponent(image)}`,
-      {
-        headers: {
-          accept: "application/json",
-          "x-api-key": process.env.CAT_API_KEY,
-        },
-      }
-    );
-
-    const images = response.data;
-
-    //console.log(images[0].url);
-
-    res.render('images/search', { images, alerts: req.flash() });
-  } catch (error) {
-    console.error(error);
-    req.flash('error', 'Unable to fetch data from The Cat API');
-    res.redirect('/search');
-  }
-});
-
-// 404 error page
-// app.get("*", (req, res) => {
-//   res.render("404", {});
-// });
-
-// Route to the fan club
-app.get("/fanclub", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("fanclub/index", { User, Cat, Post, Comment, Friend });
-});
-
-// Route to the posts
-app.get('/posts', async (req, res) => {
-  try {
-    const posts = await Post.find({});
+    const posts = await Post.find({ username: `currentUser` });    
     res.render('posts/index', { posts });
   } catch (err) {
     console.error('Error fetching posts:', err);
@@ -329,13 +308,17 @@ app.get('/posts', async (req, res) => {
   }
 });
 
-app.get('/posts/new', (req, res) => {
+app.get('/posts/new', isLoggedIn, (req, res) => {
   res.render('posts/new');
 });
 
-app.post('/posts', async (req, res) => {
+app.post('/posts', isLoggedIn, async (req, res) => {
   try {
     const { title, content, username } = req.body;
+    if (!title || !content || !username) {
+      req.flash('error', 'All fields are required');
+      return res.redirect('/posts/new');
+    }
     const newPost = new Post({ title, content, username });
     await newPost.save();
     req.flash('success', 'Post created successfully');
@@ -346,7 +329,7 @@ app.post('/posts', async (req, res) => {
   }
 });
 
-app.get('/posts/:id/edit', async (req, res) => {
+app.get('/posts/:id/edit', isLoggedIn, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     res.render('posts/edit', { post });
@@ -356,9 +339,13 @@ app.get('/posts/:id/edit', async (req, res) => {
   }
 });
 
-app.put('/posts/:id', async (req, res) => {
+app.put('/posts/:id', isLoggedIn, async (req, res) => {
   try {
     const { title, content, username } = req.body;
+    if (!title || !content || !username) {
+      req.flash('error', 'All fields are required');
+      return res.redirect(`/posts/${req.params.id}/edit`);
+    }
     await Post.findByIdAndUpdate(req.params.id, { title, content, username });
     req.flash('success', 'Post updated successfully');
     res.redirect('/posts');
@@ -368,7 +355,7 @@ app.put('/posts/:id', async (req, res) => {
   }
 });
 
-app.get('/posts/:id/delete', async (req, res) => {
+app.get('/posts/:id/delete', isLoggedIn, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     res.render('posts/delete', { post });
@@ -378,7 +365,7 @@ app.get('/posts/:id/delete', async (req, res) => {
   }
 });
 
-app.delete('/posts/:id', async (req, res) => {
+app.delete('/posts/:id', isLoggedIn, async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
     req.flash('success', 'Post deleted successfully');
@@ -389,57 +376,117 @@ app.delete('/posts/:id', async (req, res) => {
   }
 });
 
+app.get('/posts/:id', isLoggedIn, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id).populate('username');
+    res.render('posts/show', { post });
+  } catch (err) {
+    console.error('Error fetching post:', err);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+// search by image
+// app.get('/images/search', async (req, res) => {
+//   const { image } = req.query;
+//   if (!image) {
+//     req.flash('error', 'Please enter an image URL');
+//     return res.redirect('/no-results');
+//   }
+
+//   try {
+//     const response = await axios.get(
+//       `https://api.thecatapi.com/v1/images/search?limit=20&image_url=${encodeURIComponent(image)}`,
+//       {
+//         headers: {
+//           accept: "application/json",
+//           "x-api-key": process.env.CAT_API_KEY,
+//         },
+//       }
+//     );
+
+//     const images = response.data;
+
+//     //console.log(images[0].url);
+
+//     res.render('images/search', { images, alerts: req.flash() });
+//   } catch (error) {
+//     console.error(error);
+//     req.flash('error', 'Unable to fetch data from The Cat API');
+//     res.redirect('/search');
+//   }
+// });
+
+// 404 error page
+app.use((req, res, next) => {
+  res.status(404).render("404");
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error("Internal Server Error:", err);
+  res.status(500).send("Internal Server Error");
+});
+
+// Route to the fan club
+app.get("/fanclub", (req, res) => {
+  const { User, Cat, Post, Comment, Friend } = req.body;
+  res.render("fanclub/index", { User, Cat, Post, Comment, Friend });
+});
+
+
 
 // COMMENTS CONTROLLERS
-app.get("/comment", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment", { User, Cat, Post, Comment, Friend });
-});
+// app.get("/comment", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment", { User, Cat, Post, Comment, Friend });
+// });
 
-app.get("/comment/new", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/new", { User, Cat, Post, Comment, Friend });
-});
+// app.get("/comment/new", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/new", { User, Cat, Post, Comment, Friend });
+// });
 
-app.get("/comment/:id", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/show", { User, Cat, Post, Comment, Friend });
-});
+// app.get("/comment/:id", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/show", { User, Cat, Post, Comment, Friend });
+// });
 
-app.get("/comment/:id/edit", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/edit", { User, Cat, Post, Comment, Friend });
-});
+// app.get("/comment/:id/edit", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/edit", { User, Cat, Post, Comment, Friend });
+// });
 
-app.put("/comment/:id/edit", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/edit", { User, Cat, Post, Comment, Friend });
-});
+// app.put("/comment/:id/edit", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/edit", { User, Cat, Post, Comment, Friend });
+// });
 
-app.get("/comment/:id/delete", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/edit", {});
-});
+// app.get("/comment/:id/delete", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/edit", {});
+// });
 
-app.get("/comment/:id/comment", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/edit", {});
-});
+// app.get("/comment/:id/comment", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/edit", {});
+// });
 
-app.get("/comment/:id/edit", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/edit", {});
-});
+// app.get("/comment/:id/edit", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/edit", {});
+// });
 
-app.put("/comment/:id/edit", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/edit", {});
-});
+// app.put("/comment/:id/edit", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/edit", {});
+// });
 
-app.get("/comment/:id/delete", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("comment/edit", {});
-});
+// app.get("/comment/:id/delete", (req, res) => {
+//   const { User, Cat, Post, Comment, Friend } = req.body;
+//   res.render("comment/edit", {});
+// });
 
 app.get("/event", (req, res) => {
   const { User, Cat, Post, Comment, Friend } = req.body;
@@ -516,3 +563,5 @@ app.get("/contact", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+

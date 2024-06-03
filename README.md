@@ -105,7 +105,7 @@ Open a pull request.
 ### Post
 
 - id
-- username (author)
+- username 
 - title
 - content
 
@@ -114,13 +114,13 @@ Open a pull request.
 
 - id
 - content
-- userId
+- username
 - postId
 
 ### Friend
 
 - id
-- userId
+- username
 - friendId
 
 ![erd-diagram](public/assets/img/erd-meow-app.jpeg)

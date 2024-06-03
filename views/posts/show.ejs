@@ -97,25 +97,22 @@
       </nav>
     </header>
 <body>
-    <div class="container">
-        <h1 class="heading">Create New Post</h1>
-        <form action="/posts" method="POST">
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title">
-            </div>
-            <div class="mb-3">
-                <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" id="content" name="content"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="title" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" name="username">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-    <script
+  <% if (alerts.success) { %>
+    <% alerts.success.forEach(msg => { %>
+      <div class="alert alert-success"><%= msg %></div>
+    <% }) %>
+  <% } %>
+  <% if (alerts.error) { %>
+    <% alerts.error.forEach(msg => { %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <% }) %>
+  <% } %>
+
+  <h1 class="heading"><%= post.title %></h1>
+  <p><%= post.content %></p>
+  <p>Posted by: <%= post.username %></p>
+  <a href="/posts" class="btn btn-primary">Back</a>
+  <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
       crossorigin="anonymous"
@@ -129,4 +126,5 @@
     <script src="/js/app.js"></script>
   </body>
 </html>
+
 
