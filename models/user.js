@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 userSchema.pre('save', function(next) {
+    this.username = this.username.toLowerCase();
     console.log('---------- PASSWORDS ----------------', this.password ); // delete later...
     let hash = bcrypt.hashSync(this.password, 12);
     console.log('---------- HASH ----------------', hash); // might delete later

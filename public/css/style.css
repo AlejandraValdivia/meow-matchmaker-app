@@ -554,10 +554,15 @@ a.heading-h2 {
   }
   .contact {
     min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   /* .footer {
     padding: 2rem 3%;
   } */
+
+  
 }
 
 @media (max-width: 768px) {
@@ -663,6 +668,13 @@ section span {
     padding: 44px 0;
     color: var(--black-text-color);
     display: flex;
+  }
+
+  .contact {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 

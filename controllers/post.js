@@ -6,10 +6,11 @@ require('dotenv').config();
 
 // ======== GET ROUTES ===============
 // All posts
-router.get('/posts', isLoggedIn, async (req, res) => {
-  console.log('---- POSTS ----', req.body.currentUser);
+router.get('/', isLoggedIn, async (req, res) => {
   try {
-    const posts = await Post.find({ username: req.body.currentUser.username});    
+    console.log("Fetching posts...");
+    const posts = await Post.find();
+    console.log("Fetched posts:", posts);
     res.render('posts/index', { posts });
   } catch (err) {
     console.error('Error fetching posts:', err);
@@ -18,12 +19,12 @@ router.get('/posts', isLoggedIn, async (req, res) => {
 });
 
 // New post
-router.get('/posts/new', isLoggedIn, (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   res.render('posts/new');
 });
 
 // Create a new post
-router.post('/posts', isLoggedIn, async (req, res) => {
+router.post('/', isLoggedIn, async (req, res) => {
   try {
     const { title, content, username } = req.body;
     if (!title || !content || !username) {
@@ -41,7 +42,7 @@ router.post('/posts', isLoggedIn, async (req, res) => {
 });
 
 // Edit a post
-router.get('/posts/:id/edit', isLoggedIn, async (req, res) => {
+router.get('/:id/edit', isLoggedIn, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     res.render('posts/edit', { post });
@@ -52,7 +53,7 @@ router.get('/posts/:id/edit', isLoggedIn, async (req, res) => {
 });
 
 // Update a post - PUT request to /posts/:id
-router.put('/posts/:id', isLoggedIn, async (req, res) => {
+router.put('/:id', isLoggedIn, async (req, res) => {
   try {
     const { title, content, username } = req.body;
     if (!title || !content || !username) {
@@ -69,7 +70,7 @@ router.put('/posts/:id', isLoggedIn, async (req, res) => {
 });
 
 // Show Delete a post
-router.get('/posts/:id/delete', isLoggedIn, async (req, res) => {
+router.get('/:id/delete', isLoggedIn, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     res.render('posts/delete', { post });
@@ -80,7 +81,7 @@ router.get('/posts/:id/delete', isLoggedIn, async (req, res) => {
 });
 
 // Delete a post 
-router.delete('/posts/:id', isLoggedIn, async (req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
     req.flash('success', 'Post deleted successfully');
@@ -92,9 +93,13 @@ router.delete('/posts/:id', isLoggedIn, async (req, res) => {
 });
 
 // Show a single post
-router.get('/posts/:id', isLoggedIn, async (req, res) => {
+router.get('/:id', isLoggedIn, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id).populate('username');
+    if (!post) {
+      req.flash('error', 'Post not found');
+      return res.redirect('/posts');
+    }
     res.render('posts/show', { post });
   } catch (err) {
     console.error('Error fetching post:', err);
@@ -103,3 +108,4 @@ router.get('/posts/:id', isLoggedIn, async (req, res) => {
 });
 
 module.exports = router;
+

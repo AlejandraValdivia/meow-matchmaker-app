@@ -19,14 +19,12 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-   <% if
-    (alerts.success) { %> <% alerts.success.forEach(msg => { %>
+    <% if (alerts.success) { %> <% alerts.success.forEach(msg => { %>
     <div class="alert alert-success"><%= msg %></div>
-    <% }) %> 
-    <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
+    <% }) %> <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
     %>
     <div class="alert alert-danger"><%= msg %></div>
-    <% }) %> <% } %> 
+    <% }) %> <% } %>
 
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -81,13 +79,32 @@
                   <li>
                     <a class="dropdown-item" href="/auth/logout">Logout</a>
                   </li>
-                  <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                  </li>
                   <li><a class="dropdown-item" href="/profile">Profile</a></li>
                   <li><a class="dropdown-item" href="/cats">Find a Cat</a></li>
-                  <li><a class="dropdown-item" href="/application-form">Application Form</a></li>
-                  <li><a class="dropdown-item" href="/fanclub">Join Our Fan Club</a></li>
-                  <li><a class="dropdown-item" href="/learn-more">Learn More</a></li>
-                  <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/application-form"
+                      >Application Form</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/fanclub"
+                      >Join Our Fan Club</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/learn-more">Learn More</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/posts">Posts</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/comments">Comments</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/events">Events</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/contact">Contact Us</a>
+                  </li>
                   <% } %>
                 </ul>
               </li>
@@ -102,20 +119,22 @@
       <div class="home-content">
         <h3>Hello!, Welcome to <span>Meow Matchmaker</span></h3>
         <h1>Ready to make a new friend?</h1>
-        <h3>Having a cat means <span class="multiple-text">Meow Matchmaker</span>!</h3> 
+        <h3>
+          Having a cat means <span class="multiple-text">Meow Matchmaker</span>!
+        </h3>
         <p>Share your love for animals and meet new friends.</p>
         <p>Sign in or sign up to get started!</p>
         <p>Don't have an account yet?</p>
         <div class="services-container">
-         <a href="/auth/login" class="btn hero-btn">Sign in</a>
-         <a href="/auth/signup" class="btn hero-btn">Sign up</a>
+          <a href="/auth/login" class="btn hero-btn">Sign in</a>
+          <a href="/auth/signup" class="btn hero-btn">Sign up</a>
         </div>
       </div>
       <div class="home-img">
-        <img src="https://i.imgur.com/ozEaj1Z.png" alt="">
+        <img src="https://i.imgur.com/ozEaj1Z.png" alt="" />
       </div>
     </section>
-    
+
     <!-- about section -->
     <section class="about" id="about">
       <div class="about-img">
@@ -125,19 +144,27 @@
         <h2 class="heading">About <span>Meow </span>Matchmaker</h2>
         <h3>Adorable Furry Friend seeking a home</h3>
         <p>
-          Meow Matchmaker is an app that connects Cat Lovers to a database 
-          of over 100 stray cats looking for a loving home.
-          Find your favorite cat to adopt, foster, volunteer, or rent a cat
-          for your kid's birtday party or host a party for your kids if you 
-          don't have the time and want them to play with cats and learn the 
-          benefits of caring for a pet in need of love. 
+          Meow Matchmaker is an app that connects Cat Lovers to a database of
+          over 100 stray cats looking for a loving home. Find your favorite cat
+          to adopt, foster, volunteer, or rent a cat for your kid's birtday
+          party or host a party for your kids if you don't have the time and
+          want them to play with cats and learn the benefits of caring for a pet
+          in need of love.
         </p>
-        <p>Join our <a href="/fanclub">Fan Club</a>, make friends, post/find events.</p>
-        <p>Find articles about how to care for your cat <a href="/learn-more">Learn More</a>.</p>
+        <p>
+          Join our <a href="/fanclub">Fan Club</a>, make friends, post/find
+          events.
+        </p>
+        <p>
+          Find articles about how to care for your cat
+          <a href="/learn-more">Learn More</a>.
+        </p>
 
         <p>I can't wait to <span>play with you!🐱</span></p>
         <a href="/dashboard" class="btn">Read More</a>
-        <p>Or <a class="btn" href="/profile/new">Create Your Profile Here</a></p>
+        <p>
+          Or <a class="btn" href="/profile/new">Create Your Profile Here</a>
+        </p>
       </div>
     </section>
     <!-- services section design -->
@@ -151,35 +178,27 @@
           <p>
             Bring home a new friend who will be your most loyal companionship.
           </p>
-          <a href="/cats" class="btn"
-            >Read More</a
-          >
+          <a href="/cats" class="btn">Read More</a>
         </div>
 
         <div class="services-box">
           <i class="bx bx-happy-heart-eyes"></i>
           <h3>Foster Care</h3>
-          <p>
-            Shelter temporarily a furry friend in need of your love!
-          </p>
+          <p>Shelter temporarily a furry friend in need of your love!</p>
           <a href="/cats" class="btn">Read More</a>
         </div>
 
         <div class="services-box">
           <i class="bx bx-home-heart"></i>
           <h3>On-site Volunteer</h3>
-          <p>
-            Help us caring for stray cats in need of love and care.
-          </p>
+          <p>Help us caring for stray cats in need of love and care.</p>
           <a href="/cats" class="btn">Read More</a>
         </div>
 
         <div class="services-box">
-          <i class='bx bxs-party' ></i>
+          <i class="bx bxs-party"></i>
           <h3>Rent A Cat</h3>
-          <p>
-            Rent a cat for kid's parties or quality time with them!
-          </p>
+          <p>Rent a cat for kid's parties or quality time with them!</p>
           <a href="/cats" class="btn">Read More</a>
         </div>
       </div>
@@ -196,21 +215,15 @@
             <h4>Post pictures of your Cats</h4>
             <p>Share pictures and memories with your cats.</p>
             <p>We love seeing your cute cat pictures!</p>
-            <a href="/fanclub"
-              ><i class="bx bx-link-external"></i
-            ></a>
+            <a href="/fanclub"><i class="bx bx-link-external"></i></a>
           </div>
         </div>
         <div class="portfolio-box" id="portfolio-img-2">
           <img src="https://i.imgur.com/CMgPoNc.jpeg" alt="" />
           <div class="portfolio-layer">
             <h4>Make new cat lovers friends</h4>
-            <p>
-              Connect with like-minded cat lovers friends!
-            </p>
-            <a href="/fanclub"
-              ><i class="bx bx-link-external"></i
-            ></a>
+            <p>Connect with like-minded cat lovers friends!</p>
+            <a href="/fanclub"><i class="bx bx-link-external"></i></a>
           </div>
         </div>
         <div class="portfolio-box" id="portfolio-img-3">
@@ -218,12 +231,10 @@
           <div class="portfolio-layer">
             <h4>Learn about Cats</h4>
             <p>
-              Learn how EASY is to take care of cats and the
-              health benefits of petting cats!
+              Learn how EASY is to take care of cats and the health benefits of
+              petting cats!
             </p>
-            <a href="/learn-more"
-              ><i class="bx bx-link-external"></i
-            ></a>
+            <a href="/learn-more"><i class="bx bx-link-external"></i></a>
           </div>
         </div>
         <div class="portfolio-box" id="portfolio-img-4">
@@ -231,13 +242,10 @@
           <div class="portfolio-layer">
             <h4>Events</h4>
             <p>
-              Join our Fan club and find events in your area such as
-              fairs, contests, photo shoots and other events.
+              Join our Fan club and find events in your area such as fairs,
+              contests, photo shoots and other events.
             </p>
-            <a
-              href="/fanclub"
-              ><i class="bx bx-link-external"></i
-            ></a>
+            <a href="/fanclub"><i class="bx bx-link-external"></i></a>
           </div>
         </div>
         <div class="portfolio-box" id="portfolio-img-5">
@@ -245,13 +253,10 @@
           <div class="portfolio-layer">
             <h4>Blog</h4>
             <p>
-              Do you want to share about your experience with your cat?
-              How about a cat-shaped cookie recipe?
-              We love our fans posts!
+              Do you want to share about your experience with your cat? How
+              about a cat-shaped cookie recipe? We love our fans posts!
             </p>
-            <a href="/fanclub"
-              ><i class="bx bx-link-external"></i
-            ></a>
+            <a href="/fanclub"><i class="bx bx-link-external"></i></a>
           </div>
         </div>
         <div class="portfolio-box" id="portfolio-img-6">
@@ -259,241 +264,353 @@
           <div class="portfolio-layer">
             <h4>Funny Cats</h4>
             <p>
-              Have a GOOD Laugh with the Funny cats section. We love
-              all things funny about cats and their owners!
+              Have a GOOD Laugh with the Funny cats section. We love all things
+              funny about cats and their owners!
             </p>
-            <a href="/fanclub"
-              ><i class="bx bx-link-external"></i
-            ></a>
+            <a href="/fanclub"><i class="bx bx-link-external"></i></a>
           </div>
         </div>
       </div>
     </section>
 
-<section class="subscription-form">
-      <form action="https://api.smtprelay.co/contact/add?version=2" data-id="QVgwWNoWbG" method="post" id="ewf_subscriptionForm_QVgwWNoWbG" class="EWF__form Inline">
-          <div class="headers" style="">
-          <h4 id="ewf_formheader" class="EWF__header">Subscribe to our newsletter
+    <section class="subscription-form">
+      <form
+        action="https://api.smtprelay.co/contact/add?version=2"
+        data-id="QVgwWNoWbG"
+        method="post"
+        id="ewf_subscriptionForm_QVgwWNoWbG"
+        class="EWF__form Inline"
+      >
+        <div class="headers" style="">
+          <h4 id="ewf_formheader" class="EWF__header">
+            Subscribe to our newsletter
           </h4>
-          <p id="ewf_formdesc">Enter specific and clear language on the intended use of the collected information.
+          <p id="ewf_formdesc">
+            Enter specific and clear language on the intended use of the
+            collected information.
           </p>
-          </div>
-          <fieldset style="border:none;" class="webform-custominputs">
+        </div>
+        <fieldset style="border: none" class="webform-custominputs">
           <div class="inputs">
-          <div>
-          <label for="email" class="requiredInput">Email
-          </label>
-          <input maxlength="81" class="form-control" name="email" size="20" type="email" required="" placeholder="Please enter your email address">
+            <div>
+              <label for="email" class="requiredInput">Email </label>
+              <input
+                maxlength="81"
+                class="form-control"
+                name="email"
+                size="20"
+                type="email"
+                required=""
+                placeholder="Please enter your email address"
+              />
+            </div>
+            <div>
+              <label for="field_firstname">First name </label>
+              <input
+                maxlength="100"
+                class="form-control"
+                name="field_firstname"
+                size="20"
+                type="text"
+                false=""
+                placeholder="Please enter your first name"
+              />
+            </div>
+            <div>
+              <label for="field_lastname">Last name </label>
+              <input
+                maxlength="100"
+                class="form-control"
+                name="field_lastname"
+                size="20"
+                type="text"
+                false=""
+                placeholder="Please enter your last name"
+              />
+            </div>
           </div>
-          <div>
-          <label for="field_firstname">First name
-          </label>
-          <input maxlength="100" class="form-control" name="field_firstname" size="20" type="text" false="" placeholder="Please enter your first name">
-          </div>
-          <div>
-          <label for="field_lastname">Last name
-          </label>
-          <input maxlength="100" class="form-control" name="field_lastname" size="20" type="text" false="" placeholder="Please enter your last name">
-          </div>
-          </div>
-          <div class="checkboxes">
-          </div>
-          <div class="webform-lists">
-          </div>
-          <div class="consent">
-          </div>
-          <p id="ewf_datadisclaimer">We use Elastic Email as our marketing automation service. By submitting this form, you agree that the information you provide will be transferred to Elastic Email for processing in accordance with their 
-          <a href="https://elasticemail.com/resources/usage-policies/terms-of-use/" target="_blank">Terms of Use</a> and 
-          <a href="https://elasticemail.com/resources/usage-policies/privacy-policy/" target="_blank">Privacy Policy</a>.
+          <div class="checkboxes"></div>
+          <div class="webform-lists"></div>
+          <div class="consent"></div>
+          <p id="ewf_datadisclaimer">
+            We use Elastic Email as our marketing automation service. By
+            submitting this form, you agree that the information you provide
+            will be transferred to Elastic Email for processing in accordance
+            with their
+            <a
+              href="https://elasticemail.com/resources/usage-policies/terms-of-use/"
+              target="_blank"
+              >Terms of Use</a
+            >
+            and
+            <a
+              href="https://elasticemail.com/resources/usage-policies/privacy-policy/"
+              target="_blank"
+              >Privacy Policy</a
+            >.
           </p>
-          </fieldset>
-          <fieldset class="webform-options style-updated" style="border:none;">
-          <div id="captcha" style="text-align:center">
-          <div class="text-center" style="display: inline-block;margin: auto;padding: 10px;">
-          <div id="webformcaptcha">
+        </fieldset>
+        <fieldset class="webform-options style-updated" style="border: none">
+          <div id="captcha" style="text-align: center">
+            <div
+              class="text-center"
+              style="display: inline-block; margin: auto; padding: 10px"
+            >
+              <div id="webformcaptcha"></div>
+            </div>
+            <script type="text/javascript">
+              var grecaptchaready = function () {
+                var eewebformsubmit = document.getElementById("eesubmit");
+                grecaptcha.render("webformcaptcha", {
+                  sitekey: "6LcrnnAeAAAAAKCHYWuH2_5kSi9xvFn298xVJsZQ",
+                  callback: function (response) {
+                    if (response) {
+                      eewebformsubmit.disabled = false;
+                    }
+                  },
+                });
+              };
+            </script>
           </div>
-          </div>
-          <script type="text/javascript">var grecaptchaready = function () {var eewebformsubmit = document.getElementById("eesubmit"); grecaptcha.render('webformcaptcha', { 'sitekey': '6LcrnnAeAAAAAKCHYWuH2_5kSi9xvFn298xVJsZQ', 'callback': function (response) { if (response) { eewebformsubmit.disabled = false; } } });}</script>
-          </div>
-          <script id="recaptchaScript" src="https://www.google.com/recaptcha/api.js?onload=grecaptchaready&amp;render=explicit" async="" defer="">
-          </script>
-          <input type="submit" name="submit" value="Subscribe" id="eesubmit" class="EWF__subscribe" disabled="">
-          <input type="hidden" name="publicaccountid" value="c44ab111-01df-4b0c-829e-237ab1015aad">
-          <input type="hidden" name="returnUrl" value="https://github.com/AlejandraValdivia">
-          <input type="hidden" name="activationReturnUrl" value="https://github.com/AlejandraValdivia">
-          <input type="hidden" name="alreadyactiveurl" value="https://github.com/AlejandraValdivia">
-          <input type="hidden" name="activationTemplate" value="">
-          <input type="hidden" name="source" value="WebForm">
-          <input type="hidden" name="verifyemail" value="false" id="ewf_verifyEmails">
-          <input type="hidden" id="ewf_captcha" name="captcha" value="true">
-          <input type="hidden" name="sendActivation" value="true">
-          <input type="hidden" name="notifyEmail" value="alexvcodes@gmail.com">
-          <button type="button" name="dismissForm" id="ewf_dismissForm" style="display:none; position: absolute; top: 0; right: 0; float: right">X
+          <script
+            id="recaptchaScript"
+            src="https://www.google.com/recaptcha/api.js?onload=grecaptchaready&amp;render=explicit"
+            async=""
+            defer=""
+          ></script>
+          <input
+            type="submit"
+            name="submit"
+            value="Subscribe"
+            id="eesubmit"
+            class="EWF__subscribe"
+            disabled=""
+          />
+          <input
+            type="hidden"
+            name="publicaccountid"
+            value="c44ab111-01df-4b0c-829e-237ab1015aad"
+          />
+          <input
+            type="hidden"
+            name="returnUrl"
+            value="https://github.com/AlejandraValdivia"
+          />
+          <input
+            type="hidden"
+            name="activationReturnUrl"
+            value="https://github.com/AlejandraValdivia"
+          />
+          <input
+            type="hidden"
+            name="alreadyactiveurl"
+            value="https://github.com/AlejandraValdivia"
+          />
+          <input type="hidden" name="activationTemplate" value="" />
+          <input type="hidden" name="source" value="WebForm" />
+          <input
+            type="hidden"
+            name="verifyemail"
+            value="false"
+            id="ewf_verifyEmails"
+          />
+          <input type="hidden" id="ewf_captcha" name="captcha" value="true" />
+          <input type="hidden" name="sendActivation" value="true" />
+          <input
+            type="hidden"
+            name="notifyEmail"
+            value="alexvcodes@gmail.com"
+          />
+          <button
+            type="button"
+            name="dismissForm"
+            id="ewf_dismissForm"
+            style="
+              display: none;
+              position: absolute;
+              top: 0;
+              right: 0;
+              float: right;
+            "
+          >
+            X
           </button>
-          </fieldset>
-          <div id="ewf_style" class="Inline">
-          <style id="webform__main-styles">form.EWF__form {
-          background:#f0f2f8;
-          padding-top:40px;
-          padding-left:40px;
-          padding-bottom:40px;
-          padding-right:40px;
-          border-radius:6px;
-          box-sizing:border-box;
-          }
-          form.EWF__form p {
-          color:#7d8da8;
-          text-align:left;
-          line-height:14px;
-          font-size:12px;
-          font-family:Arial, Helvetica, sans-serif;
-          margin:12px 0;
-          font-style: normal;
-          font-weight: normal;
-          }
-          form.EWF__form .EWF__header {
-          background:transparent;
-          padding-top:0px;
-          color:#32325c;
-          padding-left:0px;
-          padding-bottom:0px;
-          padding-right:0px;
-          text-align:left;
-          line-height:24px;
-          font-size:22px;
-          margin:0;
-          font-family:Arial, Helvetica, sans-serif;
-          font-style: normal;
-          font-weight: bold;
-          }
-          form.EWF__form label {
-          line-height:16px;
-          font-size:14px;
-          color:#32325c;
-          display:block;
-          font-family:Arial, Helvetica, sans-serif;
-          margin-bottom:5px;
-          font-style: normal;
-          font-weight: bold;
-          text-align: left;
-          }
-          form.EWF__form .EWF__subscribe {
-          background:#6262fe;
-          padding-top:12px;
-          line-height:18px;
-          font-size:16px;
-          color:#ffffff;
-          padding-left:12px;
-          padding-bottom:12px;
-          padding-right:12px;
-          border-radius:6px;
-          border:0;
-          display:inline-block;
-          width:auto;
-          max-width:100%;
-          font-family:Arial, Helvetica, sans-serif;
-          font-style: normal;
-          font-weight: normal;
-          cursor: pointer;
-          }
-          .EWF__form .webform-options {
-          text-align:center;
-          }
-          form.EWF__form input {
-          background:#ffffff;
-          padding-top:12px;
-          color:#000000;
-          padding-left:12px;
-          padding-bottom:12px;
-          padding-right:12px;
-          border-radius:0px;
-          line-height:18px;
-          font-size:16px;
-          border:0;
-          width:100%;
-          max-width:100%;
-          display:block;
-          font-family:Arial, Helvetica, sans-serif;
-          font-style: normal;
-          font-weight: normal;
-          text-align: left;
-          }
-          form.EWF__form input::placeholder {
-          color:#000000;
-          font-size:14px;
-          }
-          form.EWF__form .inputs > div {
-          margin-bottom:1rem;
-          }
-          form.EWF__form .checkboxes label,form.EWF__form .consent label {
-          position: relative;
-          cursor: pointer;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-          }
-          form.EWF__form * {
-          box-sizing:border-box;
-          }
-          form.EWF__form fieldset {
-          display:block;
-          padding:0;
-          margin:0;
-          }
-          form.EWF__form .checkboxes input[type="checkbox"],form.EWF__form .consent input[type="checkbox"] {
-          border: 1px solid #CFD6DB;
-          border-radius: 4px;
-          padding: 12px;
-          width: 16px;
-          display: inline-block;
-          margin-right: 4px;
-          }
-          form.EWF__form .checkboxes input[type="checkbox"]:before,form.EWF__form .consent input[type="checkbox"]:before {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Warstwa_1' x='0px' y='0px' viewBox='0 0 16 16' style='enable-background:new 0 0 16 16;' xml:space='preserve' width='16' height='16'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:none;%7D .st1%7Bfill:%23FFFFFF;stroke:%23CFD6DB;%7D%0A%3C/style%3E%3Cg transform='translate(-925 -324)'%3E%3Cg transform='translate(925 324)'%3E%3Cpath class='st0' d='M4,0h8c2.2,0,4,1.8,4,4v8c0,2.2-1.8,4-4,4H4c-2.2,0-4-1.8-4-4V4C0,1.8,1.8,0,4,0z'/%3E%3Cpath class='st1' d='M4,0.5h8c1.9,0,3.5,1.6,3.5,3.5v8c0,1.9-1.6,3.5-3.5,3.5H4c-1.9,0-3.5-1.6-3.5-3.5V4C0.5,2.1,2.1,0.5,4,0.5z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-          background-color: #fff;
-          width: 16px;
-          height: 16px;
-          content: '';
-          display: block;
-          cursor: pointer;
-          border-radius: 4px;
-          }
-          form.EWF__form .checkboxes input[type="checkbox"]:hover:before,form.EWF__form .consent input[type="checkbox"]:hover:before {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:%23fff;stroke:%235457ff;stroke-width:2px;%7D.b%7Bstroke:none;%7D.c%7Bfill:none;%7D%3C/style%3E%3C/defs%3E%3Cg transform='translate(-925 -324)'%3E%3Cg class='a' transform='translate(925 324)'%3E%3Crect class='b' width='16' height='16' rx='4'/%3E%3Crect class='c' x='1' y='1' width='14' height='14' rx='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-          background-color: #fff;
-          }
-          form.EWF__form .checkboxes input[type="checkbox"]:checked:before,form.EWF__form .consent input[type="checkbox"]:checked:before {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Warstwa_1' x='0px' y='0px' viewBox='0 0 16 16' style='enable-background:new 0 0 16 16;' xml:space='preserve' width='16' height='16'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:none;%7D .st1%7Bfill:%23FFFFFF;stroke:%235457FF;%7D .st2%7Bfill:%2332325C;%7D%0A%3C/style%3E%3Cg transform='translate(-925 -324)'%3E%3Cg transform='translate(925 324)'%3E%3Cpath class='st0' d='M4,0h8c2.2,0,4,1.8,4,4v8c0,2.2-1.8,4-4,4H4c-2.2,0-4-1.8-4-4V4C0,1.8,1.8,0,4,0z'/%3E%3Cpath class='st1' d='M4,0.5h8c1.9,0,3.5,1.6,3.5,3.5v8c0,1.9-1.6,3.5-3.5,3.5H4c-1.9,0-3.5-1.6-3.5-3.5V4C0.5,2.1,2.1,0.5,4,0.5z'/%3E%3C/g%3E%3Cpath class='st2' d='M938,328.9l-0.8-0.8c-0.1-0.1-0.1-0.1-0.2,0c0,0,0,0,0,0l-5.6,5.9l-2.3-2.4c-0.1-0.1-0.1-0.1-0.2,0 c0,0,0,0,0,0l-0.8,0.8c-0.1,0.1-0.1,0.2,0,0.2l3.2,3.3c0.1,0.1,0.1,0.1,0.2,0c0,0,0,0,0,0l6.5-6.9C938,329,938,328.9,938,328.9z'/%3E%3C/g%3E%3C/svg%3E");
-          background-color: #fff;
-          }
-          form.EWF__form .checkboxes input[type="checkbox"]:hover:checked:before,form.EWF__form .consent input[type="checkbox"]:hover:checked:before {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:%23fff;stroke:%235457ff;stroke-width:2px;%7D.b%7Bfill:%2332325c;%7D.c%7Bstroke:none;%7D.d%7Bfill:none;%7D%3C/style%3E%3C/defs%3E%3Cg transform='translate(-925 -324)'%3E%3Cg class='a' transform='translate(925 324)'%3E%3Crect class='c' width='16' height='16' rx='4'/%3E%3Crect class='d' x='1' y='1' width='14' height='14' rx='3'/%3E%3C/g%3E%3Cpath class='b' d='M10.032.964,9.224.118a.141.141,0,0,0-.2,0L3.384,6.02,1.124,3.653a.141.141,0,0,0-.2,0L.116,4.5a.157.157,0,0,0,0,.212L3.284,8.032a.141.141,0,0,0,.2,0l6.545-6.855A.153.153,0,0,0,10.032.964Z' transform='translate(927.925 327.925)'/%3E%3C/g%3E%3C/svg%3E");
-          background-color: #fff;
-          }
-          form.EWF__form .EWF__error {
-          color: red;
-          padding-top: 10px;
-          }
-          form.EWF__form a {
-          color: #5457ff;
-          font-style: normal;
-          line-height: 14px;
-          font-size: 12px;
-          font-weight: normal;
-          }
-          form.EWF__form .EWF__subscribe:disabled {
-          cursor: default;
-          }
-          @supports (-ms-ime-align:auto) {
-          form.EWF__form .checkboxes input[type='checkbox'], form.EWF__form .consent input[type='checkbox'] {
-          width: 16px !important;
-          margin-right: 5px;
-          }
-          }
+        </fieldset>
+        <div id="ewf_style" class="Inline">
+          <style id="webform__main-styles">
+            form.EWF__form {
+              background: #f0f2f8;
+              padding-top: 40px;
+              padding-left: 40px;
+              padding-bottom: 40px;
+              padding-right: 40px;
+              border-radius: 6px;
+              box-sizing: border-box;
+            }
+            form.EWF__form p {
+              color: #7d8da8;
+              text-align: left;
+              line-height: 14px;
+              font-size: 12px;
+              font-family: Arial, Helvetica, sans-serif;
+              margin: 12px 0;
+              font-style: normal;
+              font-weight: normal;
+            }
+            form.EWF__form .EWF__header {
+              background: transparent;
+              padding-top: 0px;
+              color: #32325c;
+              padding-left: 0px;
+              padding-bottom: 0px;
+              padding-right: 0px;
+              text-align: left;
+              line-height: 24px;
+              font-size: 22px;
+              margin: 0;
+              font-family: Arial, Helvetica, sans-serif;
+              font-style: normal;
+              font-weight: bold;
+            }
+            form.EWF__form label {
+              line-height: 16px;
+              font-size: 14px;
+              color: #32325c;
+              display: block;
+              font-family: Arial, Helvetica, sans-serif;
+              margin-bottom: 5px;
+              font-style: normal;
+              font-weight: bold;
+              text-align: left;
+            }
+            form.EWF__form .EWF__subscribe {
+              background: #6262fe;
+              padding-top: 12px;
+              line-height: 18px;
+              font-size: 16px;
+              color: #ffffff;
+              padding-left: 12px;
+              padding-bottom: 12px;
+              padding-right: 12px;
+              border-radius: 6px;
+              border: 0;
+              display: inline-block;
+              width: auto;
+              max-width: 100%;
+              font-family: Arial, Helvetica, sans-serif;
+              font-style: normal;
+              font-weight: normal;
+              cursor: pointer;
+            }
+            .EWF__form .webform-options {
+              text-align: center;
+            }
+            form.EWF__form input {
+              background: #ffffff;
+              padding-top: 12px;
+              color: #000000;
+              padding-left: 12px;
+              padding-bottom: 12px;
+              padding-right: 12px;
+              border-radius: 0px;
+              line-height: 18px;
+              font-size: 16px;
+              border: 0;
+              width: 100%;
+              max-width: 100%;
+              display: block;
+              font-family: Arial, Helvetica, sans-serif;
+              font-style: normal;
+              font-weight: normal;
+              text-align: left;
+            }
+            form.EWF__form input::placeholder {
+              color: #000000;
+              font-size: 14px;
+            }
+            form.EWF__form .inputs > div {
+              margin-bottom: 1rem;
+            }
+            form.EWF__form .checkboxes label,
+            form.EWF__form .consent label {
+              position: relative;
+              cursor: pointer;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+            }
+            form.EWF__form * {
+              box-sizing: border-box;
+            }
+            form.EWF__form fieldset {
+              display: block;
+              padding: 0;
+              margin: 0;
+            }
+            form.EWF__form .checkboxes input[type="checkbox"],
+            form.EWF__form .consent input[type="checkbox"] {
+              border: 1px solid #cfd6db;
+              border-radius: 4px;
+              padding: 12px;
+              width: 16px;
+              display: inline-block;
+              margin-right: 4px;
+            }
+            form.EWF__form .checkboxes input[type="checkbox"]:before,
+            form.EWF__form .consent input[type="checkbox"]:before {
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Warstwa_1' x='0px' y='0px' viewBox='0 0 16 16' style='enable-background:new 0 0 16 16;' xml:space='preserve' width='16' height='16'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:none;%7D .st1%7Bfill:%23FFFFFF;stroke:%23CFD6DB;%7D%0A%3C/style%3E%3Cg transform='translate(-925 -324)'%3E%3Cg transform='translate(925 324)'%3E%3Cpath class='st0' d='M4,0h8c2.2,0,4,1.8,4,4v8c0,2.2-1.8,4-4,4H4c-2.2,0-4-1.8-4-4V4C0,1.8,1.8,0,4,0z'/%3E%3Cpath class='st1' d='M4,0.5h8c1.9,0,3.5,1.6,3.5,3.5v8c0,1.9-1.6,3.5-3.5,3.5H4c-1.9,0-3.5-1.6-3.5-3.5V4C0.5,2.1,2.1,0.5,4,0.5z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+              background-color: #fff;
+              width: 16px;
+              height: 16px;
+              content: "";
+              display: block;
+              cursor: pointer;
+              border-radius: 4px;
+            }
+            form.EWF__form .checkboxes input[type="checkbox"]:hover:before,
+            form.EWF__form .consent input[type="checkbox"]:hover:before {
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:%23fff;stroke:%235457ff;stroke-width:2px;%7D.b%7Bstroke:none;%7D.c%7Bfill:none;%7D%3C/style%3E%3C/defs%3E%3Cg transform='translate(-925 -324)'%3E%3Cg class='a' transform='translate(925 324)'%3E%3Crect class='b' width='16' height='16' rx='4'/%3E%3Crect class='c' x='1' y='1' width='14' height='14' rx='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+              background-color: #fff;
+            }
+            form.EWF__form .checkboxes input[type="checkbox"]:checked:before,
+            form.EWF__form .consent input[type="checkbox"]:checked:before {
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Warstwa_1' x='0px' y='0px' viewBox='0 0 16 16' style='enable-background:new 0 0 16 16;' xml:space='preserve' width='16' height='16'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:none;%7D .st1%7Bfill:%23FFFFFF;stroke:%235457FF;%7D .st2%7Bfill:%2332325C;%7D%0A%3C/style%3E%3Cg transform='translate(-925 -324)'%3E%3Cg transform='translate(925 324)'%3E%3Cpath class='st0' d='M4,0h8c2.2,0,4,1.8,4,4v8c0,2.2-1.8,4-4,4H4c-2.2,0-4-1.8-4-4V4C0,1.8,1.8,0,4,0z'/%3E%3Cpath class='st1' d='M4,0.5h8c1.9,0,3.5,1.6,3.5,3.5v8c0,1.9-1.6,3.5-3.5,3.5H4c-1.9,0-3.5-1.6-3.5-3.5V4C0.5,2.1,2.1,0.5,4,0.5z'/%3E%3C/g%3E%3Cpath class='st2' d='M938,328.9l-0.8-0.8c-0.1-0.1-0.1-0.1-0.2,0c0,0,0,0,0,0l-5.6,5.9l-2.3-2.4c-0.1-0.1-0.1-0.1-0.2,0 c0,0,0,0,0,0l-0.8,0.8c-0.1,0.1-0.1,0.2,0,0.2l3.2,3.3c0.1,0.1,0.1,0.1,0.2,0c0,0,0,0,0,0l6.5-6.9C938,329,938,328.9,938,328.9z'/%3E%3C/g%3E%3C/svg%3E");
+              background-color: #fff;
+            }
+            form.EWF__form
+              .checkboxes
+              input[type="checkbox"]:hover:checked:before,
+            form.EWF__form
+              .consent
+              input[type="checkbox"]:hover:checked:before {
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:%23fff;stroke:%235457ff;stroke-width:2px;%7D.b%7Bfill:%2332325c;%7D.c%7Bstroke:none;%7D.d%7Bfill:none;%7D%3C/style%3E%3C/defs%3E%3Cg transform='translate(-925 -324)'%3E%3Cg class='a' transform='translate(925 324)'%3E%3Crect class='c' width='16' height='16' rx='4'/%3E%3Crect class='d' x='1' y='1' width='14' height='14' rx='3'/%3E%3C/g%3E%3Cpath class='b' d='M10.032.964,9.224.118a.141.141,0,0,0-.2,0L3.384,6.02,1.124,3.653a.141.141,0,0,0-.2,0L.116,4.5a.157.157,0,0,0,0,.212L3.284,8.032a.141.141,0,0,0,.2,0l6.545-6.855A.153.153,0,0,0,10.032.964Z' transform='translate(927.925 327.925)'/%3E%3C/g%3E%3C/svg%3E");
+              background-color: #fff;
+            }
+            form.EWF__form .EWF__error {
+              color: red;
+              padding-top: 10px;
+            }
+            form.EWF__form a {
+              color: #5457ff;
+              font-style: normal;
+              line-height: 14px;
+              font-size: 12px;
+              font-weight: normal;
+            }
+            form.EWF__form .EWF__subscribe:disabled {
+              cursor: default;
+            }
+            @supports (-ms-ime-align: auto) {
+              form.EWF__form .checkboxes input[type="checkbox"],
+              form.EWF__form .consent input[type="checkbox"] {
+                width: 16px !important;
+                margin-right: 5px;
+              }
+            }
           </style>
-          </div>
-          </form>         
+        </div>
+      </form>
     </section>
 
     <footer class="footer">
@@ -509,33 +626,48 @@
           <p class="footer-link">Tips for Enrichment</p>
         </div>
         <div class="footer-link-list">
-          <a href="/fanclub"><p class="footer-heading"><strong>Join our Community</strong></p></a>
+          <a href="/fanclub"
+            ><p class="footer-heading">
+              <strong>Join our Community</strong>
+            </p></a
+          >
           <a href="/fanclub"><p class="footer-link">Breaking</p></a>
           <a href="/events"><p class="footer-link">Events</p></a>
           <div class="footer-social">
-            <a href="https://github.com/AlejandraValdivia"><i class='bx bxl-github'></i></a>
-            <a href="https://www.linkedin.com/in/alejandra-valdivia-developer/"><i class='bx bxl-linkedin-square' ></i></a>
-            <a href="https://www.instagram.com/hyperlinkwebca/"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/AlejandraValdivia"
+              ><i class="bx bxl-github"></i
+            ></a>
+            <a href="https://www.linkedin.com/in/alejandra-valdivia-developer/"
+              ><i class="bx bxl-linkedin-square"></i
+            ></a>
+            <a href="https://www.instagram.com/hyperlinkwebca/"
+              ><i class="fab fa-instagram"></i
+            ></a>
           </div>
         </div>
         <div class="footer-link-list">
-          <a href="/fanclub"></a><p class="footer-heading"><strong>Meow Matchmaker News</strong></p>
-          <a href="/posts"></a><p class="footer-link">Posts</p>
-          <a href="/dashboard"></a><p class="footer-link">Dashboard</p>
-          <a href="/application-form"></a><p class="footer-link">Application Form</p>
-          <a href="/cats"></a><p class="footer-link">Cats</p>
-          <a href="/"></a><p class="footer-link">Home</p>
+          <a href="/fanclub"></a>
+          <p class="footer-heading"><strong>Meow Matchmaker News</strong></p>
+          <a href="/posts"></a>
+          <p class="footer-link">Posts</p>
+          <a href="/dashboard"></a>
+          <p class="footer-link">Dashboard</p>
+          <a href="/application-form"></a>
+          <p class="footer-link">Application Form</p>
+          <a href="/cats"></a>
+          <p class="footer-link">Cats</p>
+          <a href="/"></a>
+          <p class="footer-link">Home</p>
         </div>
-        <a href="https://github.com/AlejandraValdivia"><p class="footer-copyright">Copyright Alejandra Valdivia 2024</p></a>
       </div>
 
       <div class="footer-iconTop">
         <a href="/"><i class="bx bx-up-arrow-alt"></i></a>
       </div>
-      
+      <a href="https://github.com/AlejandraValdivia"
+        ><p class="footer-copyright">Copyright Alejandra Valdivia 2024</p></a>
     </footer>
 
-    
     <!-- scroll reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- typed js -->
