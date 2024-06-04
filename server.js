@@ -7,6 +7,7 @@ const passport = require("./config/passport-config");
 const methodOverride = require('method-override');
 
 
+
 // set environment variables
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const PORT = process.env.PORT || 3000;
@@ -46,6 +47,9 @@ app.use("/cats", require("./controllers/cats"));
 app.use("/fanclub", require("./controllers/fanclub"));
 app.use("/application-form", require("./controllers/application-form"));
 app.use("/learn-more", require("./controllers/learn-more"));
+app.use("/event", require("./controllers/event"));
+app.use("/contact", require("./controllers/contact"));
+app.use("/404", require("./controllers/404"));
 
 
 // --------------------- Controllers ---------------------
@@ -54,35 +58,6 @@ app.get("/", (req, res) => {
   res.render("home", {});
 });
 
-
-
-
-
-
-
-
-// Event Form
-app.get("/event", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("event", { User, Cat, Post, Comment, Friend });
-});
-
-// Contact Form
-app.get("/contact", (req, res) => {
-  const { name, email, password } = req.body;
-  res.render("contact", { name, email, password });
-});
-
-// ------------404 error page--------------
-app.use((req, res, next) => {
-  res.status(404).render("404");
-});
-
-// Global error handling middleware
-app.use((err, req, res, next) => {
-  console.error("Internal Server Error:", err);
-  res.status(500).send("Internal Server Error");
-});
 
 // Server
 app.listen(PORT, () => {

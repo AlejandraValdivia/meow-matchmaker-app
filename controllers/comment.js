@@ -1,35 +1,32 @@
 const express = require('express');
 const router = express.Router();
-require("dotenv").config();
-
-const isLoggedIn = require('../middleware/isLoggedIn');
-
-// import Comment model
 const { Comment } = require('../models');
+const isLoggedIn = require('../middleware/isLoggedIn');
+require('dotenv').config();
 
 // ======== GET ROUTES ===============
 // Get all comments for a specific post
-router.get('/post/:postId', async (req, res) => {
+router.get('/', isLoggedIn, async (req, res) => {
   try {
-    console.log(req.params.postId);
+    console.log("Fetching comments...");
     const comments = await Comment.find();
     console.log("Fetched comments:", comments);
-    res.render('comments/index', { comments });
+    res.render('comments', { comments });
   } catch (err) {
-    req.flash('error', 'Could not load comments');
-    res.redirect('/');
+    console.error('Error fetching comments:', err);
+    res.status(500).send('Server Error');
   }
 });
 
 // New comment form
-router.get('/:postId/new', isLoggedIn, (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   const { postId } = req.params;
   console.log(postId);
-  res.render('comments/new', {} );
+  res.render('/new', {} );
 });
 
 // Create a new comment
-router.post('/post/:postId', isLoggedIn, async (req, res) => {
+router.post('/', isLoggedIn, async (req, res) => {
   try {
     const { content } = req.body;
     const newComment = new Comment({
@@ -44,51 +41,77 @@ router.post('/post/:postId', isLoggedIn, async (req, res) => {
     res.redirect(`/post/${req.params.postId}`);
   } catch (err) {
     req.flash('error', 'Could not add comment');
-    res.redirect(`/comments/post/${req.params.postId}/new`);
+    res.redirect(`/post/${req.params.postId}/new`);
   }
 });
 
-// Edit comment form
+// Edit a post
 router.get('/:id/edit', isLoggedIn, async (req, res) => {
   try {
-    const comment = await Comment.find();
-    if (!comment) {
-      req.flash('error', 'Comment not found');
-      return res.redirect(`/comments/post/${comment.postId}`);
-    }
-    res.render('/edit', { comment, alerts: req.flash() });
+    const comment = await Comment.findById(req.params.id);
+    res.render('comments/edit', { comment });
   } catch (err) {
-    req.flash('error', 'Could not load comment for editing');
-    res.redirect(`/comments/post/${req.params.postId}`);
+    console.error('Error fetching comments for edit:', err);
+    res.status(500).send('Server Error');
   }
 });
 
-// Update a comment
+// Update a post - PUT request to /comments/:id
 router.put('/:id', isLoggedIn, async (req, res) => {
   try {
-    const { content } = req.body;
-    await Comment.findByIdAndUpdate(req.params.id, { content });
-    req.flash('success', 'Comment updated successfully');
-    res.redirect(`/comments/post/${req.body.postId}`);
+    const { title, content, username } = req.body;
+    if (!title || !content || !username) {
+      req.flash('error', 'All fields are required');
+      return res.redirect(`/comments/${req.params.id}/edit`);
+    }
+    await Post.findByIdAndUpdate(req.params.id, { title, content, username });
+    req.flash('success', 'Post updated successfully');
+    res.redirect('/comments');
   } catch (err) {
-    req.flash('error', 'Could not update comment');
-    res.redirect(`/comments/post/${req.body.postId}`);
+    console.error('Error updating comment:', err);
+    res.status(500).send('Server Error');
   }
 });
 
-// Delete a comment
+// Show Delete a post
+router.get('/:id/delete', isLoggedIn, async (req, res) => {
+  try {
+    const comment = await Comment.findById(req.params.id);
+    res.render('comments/delete', { comment });
+  } catch (err) {
+    console.error('Error fetching comments for delete:', err);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Delete a post 
 router.delete('/:id', isLoggedIn, async (req, res) => {
   try {
-    const comment = await Comment.findByIdAndDelete(req.params.id);
+    await 
+    
+    Comment.findByIdAndDelete(req.params.id);
     req.flash('success', 'Comment deleted successfully');
-    res.redirect(`/comments/post/${comment.postId}`);
+    res.redirect('/comments');
   } catch (err) {
-    req.flash('error', 'Could not delete comment');
-    res.redirect(`/comments/post/${req.params.postId}`);
+    console.error('Error deleting post:', err);
+    res.status(500).send('Server Error');
   }
 });
 
+// Show a single comment
+router.get('/:id', isLoggedIn, async (req, res) => {
+  try {
+    const comment = await Comment.findById(req.params.id).populate('username');
+    if (!comment) {
+      req.flash('error', 'comment not found');
+      return res.redirect('/comments');
+    }
+    res.render('comments/show', { comment });
+  } catch (err) {
+    console.error('Error fetching comment:', err);
+    res.status(500).send('Server Error');
+  }
+});
 
-
-  
 module.exports = router;
+

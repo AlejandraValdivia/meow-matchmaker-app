@@ -94,7 +94,7 @@
     </header>
 
     <div class="container">
-    <h1>Comments</h1>
+    <h1 class="heading">Comments</h1>
     <% if (alerts.success) { %>
       <% alerts.success.forEach(msg => { %>
         <div class="alert alert-success"><%= msg %></div>
@@ -110,6 +110,9 @@
       <% comments.forEach(comment => { %>
         <li class="list-group-item">
           <p><strong><%= comment.username %></strong>: <%= comment.content %></p>
+          <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
           <a href="/comments/<%= comment._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
           <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display:inline;">
             <button type="submit" class="btn btn-danger btn-sm">Delete</button>

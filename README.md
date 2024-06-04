@@ -117,7 +117,6 @@ Go to http://localhost:3000/ and browse the app.
 - title
 - content
 
-
 ### Comment
 
 - id

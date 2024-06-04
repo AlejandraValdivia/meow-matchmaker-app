@@ -12,7 +12,7 @@ router.get("/", isLoggedIn, async (req, res) => {
         console.log("Fetching user...");
         const user = await User.find();
         console.log("Fetched user:", user);
-        res.render('application-form/index', { user });
+        res.render('application-form', { user });
       } catch (err) {
         console.error('Error fetching user:', err);
         res.status(500).send('Server Error');
