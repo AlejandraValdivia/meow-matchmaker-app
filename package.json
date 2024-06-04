@@ -12,7 +12,6 @@
   "author": "Alejandra Valdivia",
   "license": "ISC",
   "dependencies": {
-    "@thatapicompany/thecatapi": "^1.0.2",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",

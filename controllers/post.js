@@ -4,7 +4,7 @@ const { Post } = require('../models');
 const isLoggedIn = require('../middleware/isLoggedIn');
 require('dotenv').config();
 
-// ======== GET ROUTES ===============
+// ======== POSTS ROUTES ===============
 // All posts
 router.get('/', isLoggedIn, async (req, res) => {
   try {

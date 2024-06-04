@@ -71,6 +71,14 @@ Open a pull request.
    - npm install mongodb
    - npm install ejs
    - npm install dotenv
+   - npm install express-ejs-layouts
+   - npm install passport
+   - npm install passport-local
+   - npm install bcrypt
+   - npm install connect-flash
+
+Go to http://localhost:3000/ and browse the app.
+
    
 
 

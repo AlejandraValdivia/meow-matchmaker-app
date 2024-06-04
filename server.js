@@ -7,7 +7,7 @@ const passport = require("./config/passport-config");
 const methodOverride = require('method-override');
 
 
-
+// set environment variables
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const PORT = process.env.PORT || 3000;
 
@@ -38,14 +38,14 @@ app.use((req, res, next) => {
 // import auth routes
 app.use("/auth", require("./controllers/auth"));
 app.use('/', require('./controllers/cats'));
-app.use("/cats", require("./controllers/cats"));
+app.use("/dashboard", require("./controllers/dashboard"));
 app.use("/profile", require("./controllers/profile"));
 app.use("/posts", require("./controllers/post"));
 app.use("/comments", require("./controllers/comment"));
-
-
-// --------------------- Models ---------------------           
-const { User, Cat, Post, Comment, Friend } = require("./models");
+app.use("/cats", require("./controllers/cats"));
+app.use("/fanclub", require("./controllers/fanclub"));
+app.use("/application-form", require("./controllers/application-form"));
+app.use("/learn-more", require("./controllers/learn-more"));
 
 
 // --------------------- Controllers ---------------------
@@ -54,33 +54,12 @@ app.get("/", (req, res) => {
   res.render("home", {});
 });
 
-app.get("/fanclub", function (req, res) {
-  res.render("fanclub/index", { User, Cat, Post, Comment, Friend });
-});
 
-// APPLICATION FORM
-app.get("/application-form", (req, res) => {
-  const { name, email, phone } = req.params;
-  res.render("application-form", { name, email, phone });
-});
 
-// DASHBOARD
-app.get("/dashboard", (req, res) => {
-  const { User } = req.body;
-  res.render("dashboard", { User });
-});
 
-// LEARN MORE CONTROLLERS
-app.get("/learn-more", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("learn-more", { User, Cat, Post, Comment, Friend });
-});
 
-// Route to the fan club
-app.get("/fanclub", (req, res) => {
-  const { User, Cat, Post, Comment, Friend } = req.body;
-  res.render("fanclub/index", { User, Cat, Post, Comment, Friend });
-});
+
+
 
 // Event Form
 app.get("/event", (req, res) => {

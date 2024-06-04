@@ -244,27 +244,54 @@
       </div>
     </section>
 
-    <div class="contact" id="contact">
-  
-      <p><%= //breed.name %></p>
-      <br />
-      <img src="<%= //breed.url %>" alt="" />
-    </div>
-
-    <!-- footer section design -->
+    <!-- Footer -->
     <footer class="footer">
-      <div class="footer-text heading">
-        <p>
-          Copyright &copy;
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          by Alejandra Valdivia | All Rights Reserved.
-        </p>
+      <div class="footer-links">
+        <div class="footer-link-list">
+          <p class="footer-heading"><strong>News Topics</strong></p>
+          <a href="/dashboard"><p class="footer-link">Dashboard</p></a>
+          <a href="/event"><p class="footer-link">Events</p></a>
+          <a href="/fanclub"><p class="footer-link">Funny Pictures</p></a>
+          <p class="footer-link">Tips for Enrichment</p>
+        </div>
+        <div class="footer-link-list">
+          <a href="/fanclub"><p class="footer-heading">
+              <strong>Join our Community</strong>
+            </p></a>
+          <a href="/fanclub"><p class="footer-link">Breaking</p></a>
+          <a href="/event"><p class="footer-link">Events</p></a>
+          <div class="footer-social">
+            <a href="https://github.com/AlejandraValdivia"><i class="bx bxl-github"></i></a>
+            <a href="https://www.linkedin.com/in/alejandra-valdivia-developer/"><i class="bx bxl-linkedin-square"></i></a>
+            <a href="https://www.instagram.com/hyperlinkwebca/"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-link-list">
+            <p class="footer-heading"><strong>Meow Matchmaker News</strong></p>
+          <a href="/posts">
+            <p class="footer-link">Posts</p>
+          </a>
+          <a href="/dashboard">
+            <p class="footer-link">Dashboard</p>
+          </a>
+          <a href="/application-form">
+            <p class="footer-link">Application Form</p>
+          </a>
+          <a href="/cats">
+            <p class="footer-link">Cats</p>
+          </a>
+          <a href="/">
+            <p class="footer-link">Home</p>
+          </a>
+        </div>
       </div>
+
       <div class="footer-iconTop">
-        <a href="#home"><i class="bx bx-up-arrow-alt"></i></a>
+        <a href="/"><i class="bx bx-up-arrow-alt"></i></a>
       </div>
+      <a href="https://github.com/AlejandraValdivia">
+        <p class="footer-copyright">Copyright Alejandra Valdivia 2024</p>
+      </a>
     </footer>
 
     <!-- scroll reveal -->
@@ -281,5 +308,9 @@
       integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
       crossorigin="anonymous"
     ></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/key.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 </html>
