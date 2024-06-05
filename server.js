@@ -58,6 +58,11 @@ app.get("/", (req, res) => {
   res.render("home", {});
 });
 
+// Error handling for 404 responses
+app.all('*', (req, res) => {
+  res.status(404);
+  res.render("404");
+});
 
 // Server
 app.listen(PORT, () => {

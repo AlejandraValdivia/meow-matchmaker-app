@@ -4,7 +4,7 @@ const { Comment } = require('../models');
 const isLoggedIn = require('../middleware/isLoggedIn');
 require('dotenv').config();
 
-// ======== GET ROUTES ===============
+// ======== GET COMMENTS ROUTES ===============
 // Get all comments for a specific post
 router.get('/', isLoggedIn, async (req, res) => {
   try {
@@ -29,6 +29,7 @@ router.get('/new', isLoggedIn, (req, res) => {
 router.post('/', isLoggedIn, async (req, res) => {
   try {
     const { content } = req.body;
+    console.log(content);
     const newComment = new Comment({
       content,
       postId: req.params.postId,
@@ -38,10 +39,10 @@ router.post('/', isLoggedIn, async (req, res) => {
     });
     await newComment.save();
     req.flash('success', 'Comment added successfully');
-    res.redirect(`/post/${req.params.postId}`);
+    res.redirect(`/comments/${req.params.postId}`);
   } catch (err) {
     req.flash('error', 'Could not add comment');
-    res.redirect(`/post/${req.params.postId}/new`);
+    res.redirect(`/comments/${req.params.postId}/new`);
   }
 });
 

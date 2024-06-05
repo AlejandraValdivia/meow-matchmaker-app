@@ -32,9 +32,9 @@
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/">
             <img
-              src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
+              src="https://picsvg.com/svg/kpAMKg.jpg"
               alt="Bootstrap"
               width="30"
               height="24"
@@ -57,10 +57,10 @@
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="learn-more">Learn More</a>
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -70,7 +70,7 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Dropdown link
+                  Dashboard
                 </a>
                 <ul class="dropdown-menu">
                   <% if(!currentUser) { %>
@@ -82,8 +82,29 @@
                   <li>
                     <a class="dropdown-item" href="/auth/logout">Logout</a>
                   </li>
+                  <li>
+                    <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                  </li>
                   <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                  <li><a class="dropdown-item" href="/images/search">Cats</a></li>
+                  <li><a class="dropdown-item" href="/cats">Find a Cat</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/application-form"
+                      >Application Form</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/fanclub"
+                      >Join Our Fan Club</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/learn-more">Learn More</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/posts">Posts</a></li>
+                  <li><a class="dropdown-item" href="/event">Events</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/contact">Contact Us</a>
+                  </li>
                   <% } %>
                 </ul>
               </li>

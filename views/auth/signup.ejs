@@ -23,17 +23,87 @@
     <% }) %> <% } %>
 
     <header>
-      <nav class="navbar">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <% if(!currentUser) { %>
-          <li><a href="/auth/signup">Signup</a></li>
-          <li><a href="/auth/login">Login</a></li>
-          <% } else { %>
-          <li><a href="/auth/logout">Logout</a></li>
-          <li><a href="/profile">Profile</a></li>
-          <% } %>
-        </ul>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img
+              src="https://picsvg.com/svg/kpAMKg.jpg"
+              alt="Bootstrap"
+              width="30"
+              height="24"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="learn-more">Learn More</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dashboard
+                </a>
+                <ul class="dropdown-menu">
+                  <% if(!currentUser) { %>
+                  <li>
+                    <a class="dropdown-item" href="/auth/signup">Signup</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/auth/login">Login</a></li>
+                  <% } else { %>
+                  <li>
+                    <a class="dropdown-item" href="/auth/logout">Logout</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/cats">Find a Cat</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/application-form"
+                      >Application Form</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/fanclub"
+                      >Join Our Fan Club</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/learn-more">Learn More</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/posts">Posts</a></li>
+                  <li><a class="dropdown-item" href="/event">Events</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/contact">Contact Us</a>
+                  </li>
+                  <% } %>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
 

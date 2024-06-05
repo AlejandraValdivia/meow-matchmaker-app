@@ -33,7 +33,7 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
             <img
-              src="https://picsvg.com/svg/ta7LWHc.jpg"
+              src="https://picsvg.com/svg/kpAMKg.jpg"
               alt="Bootstrap"
               width="30"
               height="24"
@@ -81,13 +81,29 @@
                   <li>
                     <a class="dropdown-item" href="/auth/logout">Logout</a>
                   </li>
-                  <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                  </li>
                   <li><a class="dropdown-item" href="/profile">Profile</a></li>
                   <li><a class="dropdown-item" href="/cats">Find a Cat</a></li>
-                  <li><a class="dropdown-item" href="/application-form">Application Form</a></li>
-                  <li><a class="dropdown-item" href="/fanclub">Join Our Fan Club</a></li>
-                  <li><a class="dropdown-item" href="/learn-more">Learn More</a></li>
-                  <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/application-form"
+                      >Application Form</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/fanclub"
+                      >Join Our Fan Club</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/learn-more">Learn More</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/posts">Posts</a></li>
+                  <li><a class="dropdown-item" href="/event">Events</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/contact">Contact Us</a>
+                  </li>
                   <% } %>
                 </ul>
               </li>
@@ -100,6 +116,8 @@
     <div class="container">
         <h1 class="heading mt-6">All Posts</h1>
         <a href="/posts/new" class="btn btn-primary">Create New Post</a>
+        
+       
         <ul class="list-group">
             <% posts.forEach(post => { %>
                 <li class="list-group-item">
