@@ -2,10 +2,10 @@ const { User } = require('../models');
 
 // Create a user
 User.create({
-    name: 'Kevin Jones',
-    email: 'kevinjones@email.com',
-    phone: '888-444-1010',
-    password: 'poiuytrewq',
+    name: 'Alejandra Valdivia',
+    email: 'alejandra@email.com',
+    phone: '111-222-3333',
+    password: 'wassup',
 })
 .then(user => {
     console.log('---- NEW USER ----', user);

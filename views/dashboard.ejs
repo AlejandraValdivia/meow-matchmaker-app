@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-   <% console.log('---- MESSAGES ------', alerts.success) %> <% if
+   <% console.log('---- MESSAGES dashboard', alerts.success) %> <% if
     (alerts.success) { %> <% alerts.success.forEach(msg => { %>
 
     <div class="alert alert-success"><%= msg %></div>
@@ -125,9 +125,6 @@
           Here you can navigate through the different pages, 
           update your profile, create a post, checkout the fan club.</p>
         <a href="#services" class="btn">Get Started</a>
-      </div>
-      <div class="home-img">
-        
       </div>
     </section>
 
@@ -241,15 +238,6 @@
           <a href="/posts" class="btn"
             >Read More</a
           >
-        </div>
-
-        <div class="services-box">
-          <i class='bx bx-message-add' ></i>
-          <h3>Comment</h3>
-          <p>
-            Share your comments with the community.
-          </p>
-          <a href="/comments/new" class="btn">Read More</a>
         </div>
 
         <div class="services-box">

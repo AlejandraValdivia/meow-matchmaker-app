@@ -8,17 +8,10 @@ const Cat = require('./cat');
 const Post = require('./post');
 const Comment = require('./comment');
 const Friend = require('./friend');
-
+const ApplicationForm = require('./application-form');
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/meow-matchmaker', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true, 
-}).then(() => {
-  console.log("Connected to MongoDB");
-}).catch(err => {
-  console.error("Failed to connect to MongoDB", err);
-});
+mongoose.connect(process.env.MONGO_URI);
 
 const db = mongoose.connection;
 
@@ -31,6 +24,7 @@ module.exports = {
     Cat,
     Post,
     Comment,
-    Friend
+    Friend,
+    ApplicationForm
 }
 

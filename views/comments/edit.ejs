@@ -19,15 +19,14 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-   <% console.log('---- MESSAGES ------', alerts.success) %> <% if
+    <% console.log('---- MESSAGES edit------', alerts.success) %> <% if
     (alerts.success) { %> <% alerts.success.forEach(msg => { %>
 
     <div class="alert alert-success"><%= msg %></div>
-    <% }) %> 
-    <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
+    <% }) %> <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
     %>
     <div class="alert alert-danger"><%= msg %></div>
-    <% }) %> <% } %> 
+    <% }) %> <% } %>
 
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -115,22 +114,36 @@
     </header>
 
     <div class="container">
-        <h1 class="heading">Edit Comment</h1>
-        <form action="/comments/<%= comment._id %>?_method=PUT" method="POST">
-            <div class="mb-3">
-                <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" id="content" name="content"><%= comment.content %></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" value="<%= comment.username %>">
-            </div>
-            <div class="mb-3">
-                <label for="postId" class="form-label">Post ID</label>
-                <input type="text" class="form-control" id="postId" name="postId" value="<%= comment.postId %>">
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
+      <h1 class="heading">Edit Comment</h1>
+      <form action="/comments/<%= comment._id %>?_method=PUT" method="POST">
+        <div class="mb-3">
+          <label for="content" class="form-label">Content</label>
+          <textarea class="form-control" id="content" name="content">
+<%= comment.content %></textarea
+          >
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            value="<%= comment.username %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="postId" class="form-label">Post ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="postId"
+            name="postId"
+            value="<%= comment.postId %>"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
     </div>
     <!-- services section design -->
     <section class="services" id="services">
@@ -145,9 +158,7 @@
             reprehenderit omnis possimus facilis explicabo iure non enim, illum
             magni atque soluta et deleniti odio molestias.
           </p>
-          <a href="/cats" class="btn"
-            >Read More</a
-          >
+          <a href="/cats" class="btn">Read More</a>
         </div>
 
         <div class="services-box">
@@ -259,7 +270,6 @@
     </section>
 
     <div class="contact" id="contact">
-  
       <p><%= //breed.name %></p>
       <br />
       <img src="<%= //breed.url %>" alt="" />

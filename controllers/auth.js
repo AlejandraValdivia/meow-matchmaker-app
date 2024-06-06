@@ -41,6 +41,7 @@ router.post('/signup', async (req, res) => {
        if (!findUser) {
         const newUser = await User.create({
             name: req.body.name,
+            username: req.body.username,
             email: req.body.email,
             phone: req.body.phone,
             password: req.body.password

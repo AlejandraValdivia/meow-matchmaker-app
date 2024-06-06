@@ -26,12 +26,12 @@ router.get('/new', isLoggedIn, (req, res) => {
 // Create a new post
 router.post('/', isLoggedIn, async (req, res) => {
   try {
-    const { title, content } = req.body;
-    if (!title || !content) {
+    const { title, content, username } = req.body;
+    if (!title || !content || !username) {
       req.flash('error', 'All fields are required');
       return res.redirect('/posts/new');
     }
-    const newPost = new Post({ title, content });
+    const newPost = new Post({ title, content, username });
     await newPost.save();
     req.flash('success', 'Post created successfully');
     res.redirect('/posts');
@@ -55,12 +55,12 @@ router.get('/:id/edit', isLoggedIn, async (req, res) => {
 // Update a post - PUT request to /posts/:id
 router.put('/:id', isLoggedIn, async (req, res) => {
   try {
-    const { title, content} = req.body;
-    if (!title || !content ) {
+    const { title, content, username} = req.body;
+    if (!title || !content || !username) {
       req.flash('error', 'All fields are required');
       return res.redirect(`/posts/${req.params.id}/edit`);
     }
-    await Post.findByIdAndUpdate(req.params.id, { title, content });
+    await Post.findByIdAndUpdate(req.params.id, { title, content, username });
     req.flash('success', 'Post updated successfully');
     res.redirect('/posts');
   } catch (err) {

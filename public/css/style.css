@@ -35,6 +35,10 @@ li {
   list-style: none;
 }
 
+.list-group-item {
+  margin: 3rem 0;
+}
+
 a {
   cursor: pointer;
 }
@@ -52,6 +56,7 @@ section {
   padding: 10rem 9% 2rem;
 }
 
+/* ---- HEADER -------------------------------- */
 .header {
   position: fixed;
   top: 0;
@@ -99,6 +104,7 @@ section {
   }
 }
 
+/* ---- Home page ---- */
 .home-content h3 {
   font-size: 3.2rem;
   font-weight: 700;
@@ -131,7 +137,6 @@ span {
 h2.black-heading {
   color: var(--black-text-color);
 }
-
 
 .home-content h1 {
   font-size: 5.6rem;
@@ -173,6 +178,7 @@ h2.black-heading {
   color: var(--text-color);
   letter-spacing: 0.1rem;
   transform: 0.5s ease;
+  margin: 2rem;
 }
 
 .btn:hover {
@@ -199,6 +205,7 @@ a.heading-h2 {
   color: white;
 }
 
+/* ---- About ---- */
 .about {
   display: flex;
   justify-content: center;
@@ -239,6 +246,7 @@ a.heading-h2 {
   color: var(--black-text-color);
 }
 
+/* ---- Services ---- */
 .services h2 {
   margin-bottom: 5rem;
   color: var(--text-color);
@@ -288,6 +296,7 @@ a.heading-h2 {
   color: var(--black-text-color);
 }
 
+/* --- Homepage cat gallery showing app features --- */
 .portfolio {
   background: var(--second-bg-color);
 }
@@ -366,10 +375,10 @@ a.heading-h2 {
 
 .portfolio-layer a i {
   font-size: 2rem;
-  color: var(--second-bg-color);
+  color: var(--second-color);
 }
 
-/* Custom styles for the gallery */
+/* --- Cat Gallery --- styles */
 .card {
   transition: transform 0.2s;
 }
@@ -389,8 +398,16 @@ a.heading-h2 {
   color: #ff6f61;
 }
 
+/* ---- Contact Form --- styles */
 .contact h2 {
   margin-bottom: 3rem;
+}
+
+.signup-form {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .contact form {
@@ -445,6 +462,13 @@ a.heading-h2 {
   cursor: pointer;
 }
 
+label {
+  color: white;
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+
+/* ---- Subscription form ---- */
 .subscription-form {
   display: flex;
   justify-content: center;
@@ -453,24 +477,12 @@ a.heading-h2 {
   background: var(--bg-color);
 }
 
+/* ---- Post heading ---- */
 .post-heading {
    color: var(--text-color)
 }
 
-/* .footer {
-  display: flex;
-  align-items: center;
-  padding: 2rem 9%;
-  background-color: var(--second-bg-color);
-  justify-content: space-between;
-}
-
-.footer-text p {
-  font-size: 1.6rem;
-  color: var(--black-text-color);
-  text-align: center;
-}  */
-
+/* ---- Footer ---- */
 .footer {
   margin-top: 100px;
   background-color: var(--text-color);
@@ -554,15 +566,10 @@ a.heading-h2 {
   }
   .contact {
     min-height: auto;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
   }
-  /* .footer {
-    padding: 2rem 3%;
-  } */
-
-  
 }
 
 @media (max-width: 768px) {
@@ -630,13 +637,6 @@ a.heading-h2 {
   .about-img img {
     width: 90vw;
   }
-  /* .footer {
-    flex-direction: column-reverse;
-  }
-  .footer p {
-    text-align: center;
-    margin-top: 2rem;
-  } */
 }
 
 h1 {
@@ -676,6 +676,13 @@ section span {
     flex-direction: column;
     align-items: center;
   }
+
+  .signup-form {
+    min-height: auto;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 #services-box {
@@ -703,7 +710,6 @@ select.services-box option {
   margin: 1rem auto;
   width: 50%;
   padding: 2rem 0;
-  background: var(--second-bg-color);
   color: var(--black-text-color);
   font-size: 2rem;
   text-align: center;

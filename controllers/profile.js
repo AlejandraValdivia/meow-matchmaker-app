@@ -9,8 +9,8 @@ const { User } = require("../models");
 // ======== GET ROUTES ===============
 // --- AUTHENTICATED ROUTE: go to user profile page ---
 router.get('/', isLoggedIn, (req, res, next) => {
-    const { name, email, phone } = req.user;
-    res.render('profile', { name, email, phone });
+    const { name, email, phone, username } = req.user;
+    res.render('profile', { name, email, phone, username });
 });
 
 router.get('/edit', isLoggedIn, (req, res, next) => {
@@ -34,8 +34,8 @@ router.get('/delete', isLoggedIn, (req, res, next) => {
 // Route to handle profile update
 router.put('/', isLoggedIn, async (req, res, next) => {
     try {
-        const { name, email, phone } = req.body;
-        const user = await User.findByIdAndUpdate(req.user._id, { name, email, phone }, { new: true });
+        const { name, email, phone, username } = req.body;
+        const user = await User.findByIdAndUpdate(req.user._id, { name, email, phone, username }, { new: true });
         req.flash('success', 'Profile updated successfully');
         res.redirect('/profile');
     } catch (err) {
