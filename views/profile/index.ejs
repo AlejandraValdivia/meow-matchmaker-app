@@ -115,10 +115,14 @@
         <h2 class="heading">Welcome to your <span>Profile</span></h2>
         <h3>Name <span><%= name %></h3>
         <h3>Email <span><%= email %> </h3>
-          <h3>Username <span><%= username %></span></h3>
+        <h3>Username <span><%= username %></span></h3>
         <h3>Phone <span><%= phone %> </h3>
+          
           <a href="/profile/edit" class="btn">Edit</a> 
-          <a href="profile/delete" class="btn">Delete</a>
+          <form action="/profile" method="POST" onsubmit="return confirm('Are you sure you want to delete your profile? This action cannot be undone.')" style="display:inline;">
+            <button type="submit" class="btn">Delete Profile</button>
+          </form>
+
           <a href="/dashboard" class="btn">Go to Dashboard</a> 
           <a href="/auth/logout" class="btn">Logout</a>
       </div>  

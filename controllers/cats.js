@@ -9,9 +9,8 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 // import Cat model
 const { Cat } = require('../models');
 
-
 // =================== Cats ===================
-router.get("/cats", async (req, res) => {
+router.get("/", async (req, res) => { // Updated route definition
     try {
       const response = await axios.get(
         `https://api.thecatapi.com/v1/breeds?limit=10&page=0`,
@@ -46,11 +45,13 @@ router.get("/cats", async (req, res) => {
       res.render("cats/index", { cats: catsArray });
     } catch (error) {
       console.error("----- ERROR in /api-test ------", error);
+      req.flash("error", "Failed to fetch cats data");
+      res.redirect('/');
     }
   });
   
   // CAT CONTROLLERS
-  router.get("/cats/:id", async (req, res) => {
+  router.get("/:id", async (req, res) => { // Updated route definition
     const catId = req.params.id;
     try {
       // Fetch the breed information
@@ -119,7 +120,7 @@ router.get('/no-results', (req, res) => {
 });
   
 
-router.get('cats/:id', isLoggedIn, (req, res) => {
+router.get('/:id', isLoggedIn, (req, res) => { // Updated route definition
     const { id } = req.params;
     Cat.findById(id)
         .then(cat => {

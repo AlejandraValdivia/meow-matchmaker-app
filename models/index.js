@@ -7,8 +7,8 @@ const User = require('./user');
 const Cat = require('./cat');
 const Post = require('./post');
 const Comment = require('./comment');
-const Friend = require('./friend');
 const ApplicationForm = require('./application-form');
+const Contact = require('./contact');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI);
@@ -24,7 +24,7 @@ module.exports = {
     Cat,
     Post,
     Comment,
-    Friend,
-    ApplicationForm
+    ApplicationForm, 
+    Contact
 }
 
