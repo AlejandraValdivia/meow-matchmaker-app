@@ -113,22 +113,70 @@
       </nav>
     </header>
 
-    <section class="contact" id="contact">
-      <h2 class="heading">Delete <span>Profile</span></h2>
-      <p>Are you sure you want to delete your profile, 
-        <%= user.name %>? This action cannot be undone.</p>
+    <div class="contact" id="contact">
+        <h2 class="heading">Delete <span>Profile</span></h2>
+        <p>Are you sure you want to delete your profile, <%= currentUser.username %>? This action cannot be undone.</p>
+        <form action="/profile/<%= currentUser.id %>?_method=DELETE" method="POST">
+          <a href="/profile" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-danger">Delete Profile</button>
+        </form>
+    </div>
 
-      <form action="/profile/<%= user._id %>?_method=DELETE" method="POST">
-        <input type="submit" value="Cancel" class="btn" />
-        <input type="submit" value="Delete Profile" class="btn" />
-        // // <a type="submit" class="btn btn-secondary">Delete Profile</a>
-        // <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
-     
-    </section>  
     
-     <!-- scroll reveal -->
-     <script src="https://unpkg.com/scrollreveal"></script>
+    
+     
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <div class="footer-link-list">
+          <p class="footer-heading"><strong>News Topics</strong></p>
+          <a href="/dashboard"><p class="footer-link">Dashboard</p></a>
+          <a href="/event"><p class="footer-link">Events</p></a>
+          <a href="/fanclub"><p class="footer-link">Funny Pictures</p></a>
+          <p class="footer-link">Tips for Enrichment</p>
+        </div>
+        <div class="footer-link-list">
+          <a href="/fanclub"><p class="footer-heading">
+              <strong>Join our Community</strong>
+            </p></a>
+          <a href="/fanclub"><p class="footer-link">Breaking</p></a>
+          <a href="/event"><p class="footer-link">Events</p></a>
+          <div class="footer-social">
+            <a href="https://github.com/AlejandraValdivia"><i class="bx bxl-github"></i></a>
+            <a href="https://www.linkedin.com/in/alejandra-valdivia-developer/"><i class="bx bxl-linkedin-square"></i></a>
+            <a href="https://www.instagram.com/hyperlinkwebca/"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-link-list">
+            <p class="footer-heading"><strong>Meow Matchmaker News</strong></p>
+          <a href="/posts">
+            <p class="footer-link">Posts</p>
+          </a>
+          <a href="/dashboard">
+            <p class="footer-link">Dashboard</p>
+          </a>
+          <a href="/application-form">
+            <p class="footer-link">Application Form</p>
+          </a>
+          <a href="/cats">
+            <p class="footer-link">Cats</p>
+          </a>
+          <a href="/">
+            <p class="footer-link">Home</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-iconTop">
+        <a href="/"><i class="bx bx-up-arrow-alt"></i></a>
+      </div>
+      <a href="https://github.com/AlejandraValdivia">
+        <p class="footer-copyright">Copyright Alejandra Valdivia 2024</p>
+      </a>
+    </footer>
+
+    <!-- scroll reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
     <!-- typed js -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script

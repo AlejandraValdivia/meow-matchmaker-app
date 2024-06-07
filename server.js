@@ -6,15 +6,7 @@ const session = require("express-session");
 const passport = require("./config/passport-config");
 const methodOverride = require('method-override');
 
-const { User } = require('./models');
 
-User.find({})
-.then(user => {
-  console.log('---- USER ----', user);
-})
-.catch(error => {
-  console.log('---- ERROR ----', error);
-});
 
 // set environment variables
 const SECRET_SESSION = process.env.SECRET_SESSION;
@@ -50,6 +42,7 @@ app.use('/', require('./controllers/cats'));
 app.use("/dashboard", require("./controllers/dashboard"));
 app.use("/profile", require("./controllers/profile"));
 app.use("/posts", require("./controllers/post"));
+app.use("/comments", require("./controllers/comment"));
 app.use("/cats", require("./controllers/cats"));
 app.use("/fanclub", require("./controllers/fanclub"));
 app.use("/application-form", require("./controllers/application-form"));
@@ -58,6 +51,8 @@ app.use("/event", require("./controllers/event"));
 app.use("/contact", require("./controllers/contact"));
 
 
+
+// --------------------- Controllers ---------------------
 // Home page
 app.get("/", (req, res) => {
   res.render("home", {});

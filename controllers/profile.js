@@ -6,14 +6,14 @@ require("dotenv").config();
 // import User model
 const { User } = require("../models");
 
-// ======== GET ROUTES ===============
+// ======== PROFILE ROUTES ===============
 // --- AUTHENTICATED ROUTE: go to user profile page ---
-router.get('/', isLoggedIn, (req, res, next) => {
+router.get('/', isLoggedIn, (req, res) => {
     const { name, email, phone, username } = req.user;
     res.render('profile', { name, email, phone, username });
 });
 
-router.get('/edit', isLoggedIn, (req, res, next) => {
+router.get('/edit', isLoggedIn, (req, res) => {
     const user = req.user;
     if (!user) {
         req.flash('error', 'User not found');
@@ -22,17 +22,41 @@ router.get('/edit', isLoggedIn, (req, res, next) => {
     res.render('profile/edit', { user });
 });
 
-router.get('/delete', isLoggedIn, (req, res, next) => {
-    const user = req.user;
-    if (!user) {
-        req.flash('error', 'User not found');
-        return res.redirect('/profile');
-    }
-    res.render('profile/delete', { user });
+// Show Delete a profile
+router.get('/:id/delete', isLoggedIn, async (req, res) => {
+    try {
+        const userId = await User.findById(req.params.id);
+        res.render('profile/delete', { userId });
+      } catch (err) {
+        console.error('Error fetching profile for delete:', err);
+        res.status(500).send('Server Error');
+      }
 });
 
+// DELETE Profile
+router.delete('/:id', isLoggedIn, async (req, res) => {
+    console.log('DELETE request received for ID:', req.params.id);
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            console.error('User not found with ID:', req.params.id);
+            req.flash('error', 'User not found.');
+            return res.status(404).send('User Not Found');
+        }
+
+        await User.findByIdAndDelete(req.params.id);
+        req.flash('success', 'Profile deleted successfully.');
+        res.redirect('/auth/signup');
+    } catch (err) {
+        console.error('Error deleting user profile:', err);
+        req.flash('error', 'Failed to delete profile.');
+        res.status(500).send('Server Error');
+    }
+});
+
+
 // Route to handle profile update
-router.put('/', isLoggedIn, async (req, res, next) => {
+router.put('/', isLoggedIn, async (req, res) => {
     try {
         const { name, email, phone, username } = req.body;
         const user = await User.findByIdAndUpdate(req.user._id, { name, email, phone, username }, { new: true });

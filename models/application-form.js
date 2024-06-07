@@ -1,12 +1,3 @@
-// sudo code for appliction form, to include:
-// name
-// email
-// phoneNumber
-// origin
-// service
-// services
-// value??
-// submit
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -35,6 +26,10 @@ const applicationFormSchema = new Schema(
       enum: ["adopt", "fosterCare", "volunteer", "rentMe"],
       required: true,
     },
+    message: { 
+      success: String,
+      error: String
+     },
   },
   { timestamps: true }
 );

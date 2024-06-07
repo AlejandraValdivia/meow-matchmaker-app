@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
     content: { type: String },
-    postId: { type: String },
     username: { type: String },
 });
 
