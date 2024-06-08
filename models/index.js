@@ -1,30 +1,35 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
-mongoose.connect(process.env.MONGO_URI);
+// models
+const User = require("./user");
+const ApplicationForm = require("./application-form");
+const Cat = require("./cat");
+const Comment = require("./comment");
+const Contact = require("./contact");
+const Post = require("./post");
 
-// import models
-const User = require('./user');
-const Cat = require('./cat');
-const Post = require('./post');
-const Comment = require('./comment');
-const ApplicationForm = require('./application-form');
-const Contact = require('./contact');
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI);
-
-const db = mongoose.connection;
-
-db.once('open', () => console.log(`Connected to MongoDB at ${db.host}: ${db.port}`));
-db.on('error', (error) => console.log('Database error \n', error));
-
-module.exports = {
-    // models go here
-    User,
-    Cat,
-    Post,
-    Comment,
-    ApplicationForm, 
-    Contact
+const mongoose = require("mongoose");
+const uri = process.env.MONGO_URI;
+const clientOptions = {
+  serverApi: { version: "1", strict: true, deprecationErrors: true },
+};
+async function run() {
+  try {
+    // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
+    await mongoose.connect(uri, clientOptions);
+    await mongoose.connection.db.admin().command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
+  } finally {
+  }
 }
+run().catch(console.dir);
 
+// export models
+module.exports = {
+  ApplicationForm,
+  Cat,
+  Comment,
+  Contact,
+  Post,
+  User,
+};
