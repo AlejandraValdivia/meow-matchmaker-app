@@ -59,35 +59,33 @@ Push to the branch: git push origin feature/YourFeature
 Open a pull request.
 
 ## Installation Instructions
+
 1.- Fork the repository
 2.- Clone the repository to your local machine
 3.- Install the following packages:
-   - npm install
-   - npm install express
-   - npm install express-session
-   - npm install method-override
-   - npm install axios
-   - npm install mongoose
-   - npm install mongodb
-   - npm install ejs
-   - npm install dotenv
-   - npm install express-ejs-layouts
-   - npm install passport
-   - npm install passport-local
-   - npm install bcrypt
-   - npm install connect-flash
+
+- npm install
+- npm install express
+- npm install express-session
+- npm install method-override
+- npm install axios
+- npm install mongoose
+- npm install mongodb
+- npm install ejs
+- npm install dotenv
+- npm install express-ejs-layouts
+- npm install passport
+- npm install passport-local
+- npm install bcrypt
+- npm install connect-flash
 
 Go to http://localhost:3000/ and browse the app.
-
-   
-
-
 
 ## Wireframe
 
 ![wireframe](public/assets/img/meow-app-blue-v2.jpg)
 
-## ERD
+## ERD - Database Schemas
 
 ### User 👧🏽 👦🏻
 
@@ -96,10 +94,9 @@ Go to http://localhost:3000/ and browse the app.
 - email
 - username
 - password
-- image (optional)
 - phone number (optional)
 
-### Cat
+### Cat 🐱
 
 - id
 - name
@@ -109,11 +106,10 @@ Go to http://localhost:3000/ and browse the app.
 - origin (country of origin)
 - afectionLevel
 
-
 ### Post
 
 - id
-- username 
+- username
 - title
 - content
 
@@ -124,10 +120,14 @@ Go to http://localhost:3000/ and browse the app.
 - username
 - postId
 
-### Friend
+### Application Form
 
 - id
-- username
-- friendId
+- user_id
+- name
+- email
+- phone number
+- origin (country of origin)
+- services
 
-![erd-diagram](public/assets/img/erd-meow-app.jpeg)
+![erd-diagram](public/assets/img/erd-databases.jpeg)

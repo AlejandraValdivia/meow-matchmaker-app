@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,21 +19,19 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-   <% if
-    (alerts.success) { %> <% alerts.success.forEach(msg => { %>
+    <% if (alerts.success) { %> <% alerts.success.forEach(msg => { %>
     <div class="alert alert-success"><%= msg %></div>
-    <% }) %> 
-    <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
+    <% }) %> <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
     %>
     <div class="alert alert-danger"><%= msg %></div>
-    <% }) %> <% } %> 
+    <% }) %> <% } %>
 
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
             <img
-              src="https://picsvg.com/svg/kpAMKg.jpg"
+              src="https://picsvg.com/svg/fCJDCYn.jpg"
               alt="Bootstrap"
               width="30"
               height="24"
@@ -101,7 +98,7 @@
                     <a class="dropdown-item" href="/learn-more">Learn More</a>
                   </li>
                   <li><a class="dropdown-item" href="/posts">Posts</a></li>
-                  <li><a class="dropdown-item" href="/event">Events</a></li>
+                  <li><a class="dropdown-item" href="/comments">Comments</a></li>
                   <li>
                     <a class="dropdown-item" href="/contact">Contact Us</a>
                   </li>
@@ -116,19 +113,19 @@
 <body>
     <div class="contact">
         <h1 class="heading">Delete Post</h1>
-        <p>Are you sure you want to delete this post?</p>
+        <p class="text-center">Are you sure you want to delete this post?</p>
         <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
             <button type="submit" class="btn btn-danger">Delete</button>
             <a href="/posts" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
+    
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-links">
         <div class="footer-link-list">
           <p class="footer-heading"><strong>News Topics</strong></p>
           <a href="/dashboard"><p class="footer-link">Dashboard</p></a>
-          <a href="/event"><p class="footer-link">Events</p></a>
           <a href="/fanclub"><p class="footer-link">Funny Pictures</p></a>
           <p class="footer-link">Tips for Enrichment</p>
         </div>

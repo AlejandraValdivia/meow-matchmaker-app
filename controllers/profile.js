@@ -30,17 +30,28 @@ router.put('/', isLoggedIn, async (req, res) => {
     }
 });
 
-// Show delete profile confirmation page
-router.get('/delete', isLoggedIn, (req, res) => {
-    const { name, email, phone, username } = req.user;
-    res.render('profile/delete', { name, email, phone, username });
+// Show delete profile page
+// router.get('/delete', isLoggedIn, (req, res) => {
+//     const { name, email, phone, username } = req.user;
+//     res.render('profile/delete', { name, email, phone, username });
+// });
+
+// Show delete a user id page
+router.get('/:id/delete', isLoggedIn, async (req, res) => {
+    try {
+        console.log('Fetching user:', req.params.id);
+        const user = await User.findById(req.params.id);
+        res.render('profile/delete', { user });
+    } catch (err) {
+        console.error('Error fetching profile for delete:', err);
+        res.status(500).send('Server Error');
+    }
 });
 
 // Handle profile deletion
-router.delete('/', isLoggedIn, async (req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
     try {
-        await User.findByIdAndDelete(req.user._id);
-        console.log('Fetching user:', req.user._id);
+        await User.findByIdAndDelete(req.params.id);
         req.flash('success', 'Profile deleted successfully');
         res.redirect('/auth/login');
     } catch (err) {

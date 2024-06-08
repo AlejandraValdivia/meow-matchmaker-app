@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Our Fan Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Homepage | Meow Matchmaker App</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -16,33 +16,23 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Crete+Round|Open+Sans:400,700&display=swap"
-      rel="stylesheet"
-    />
-    
-    <link rel="stylesheet" href="/css/fan-club.css" />
-    <script
-      src="https://kit.fontawesome.com/9faec82d34.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fan-club.css">
   </head>
-    <% if
-    (alerts.success) { %> <% alerts.success.forEach(msg => { %>
-
+  <body>
+    <% if (alerts.success) { %> <% alerts.success.forEach(msg => { %>
     <div class="alert alert-success"><%= msg %></div>
-    <% }) %> 
-    <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
+    <% }) %> <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
     %>
     <div class="alert alert-danger"><%= msg %></div>
-    <% }) %> <% } %> 
+    <% }) %> <% } %>
 
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
             <img
-              src="https://picsvg.com/svg/kpAMKg.jpg"
+              src="https://picsvg.com/svg/fCJDCYn.jpg"
               alt="Bootstrap"
               width="30"
               height="24"
@@ -109,7 +99,7 @@
                     <a class="dropdown-item" href="/learn-more">Learn More</a>
                   </li>
                   <li><a class="dropdown-item" href="/posts">Posts</a></li>
-                  <li><a class="dropdown-item" href="/event">Events</a></li>
+                  <li><a class="dropdown-item" href="/comments">Comments</a></li>
                   <li>
                     <a class="dropdown-item" href="/contact">Contact Us</a>
                   </li>
@@ -310,71 +300,6 @@
           </div>
         </li>
       </ul>
-      <div class="ad event">
-        <h3 class="event__title">Do you have an event coming up and want to share with us?</h3>
-        <p>Complete and submit this form and we'll be happy to share your 
-          event on our Fan Page</p>
-        <img src="https://i.imgur.com/uvFEcJN.jpeg" alt="Guppies Ad" />
-      
-      <div class="event__heading">
-        <p class="event__subtitle">Submit An Event</p>
-        <h2 class="event__title">Let us know about your Event!</h2>
-      </div>
-      <form action="/event" class="event-form" method="POST">
-        <div class="event-form__info">
-          <div class="event-form__field">
-            <label class="event-form__label" for="name"
-              ><p class="event-form__label-question">Full Name</p>
-            </label>
-            <input type="text" placeholder="Full Name" name="name" class="event-form__input" required/>
-          </div>
-          <div class="event-form__field">
-            <label class="event-form__label" for="email"
-              ><p class="event-form__label-question">Email Address</p>
-            </label>
-            <input type="text" placeholder="Email"   id="email" class="event-form__input" required/>
-          </div>
-          <div class="event-form__field">
-            <label class="event-form__label" for="phone"
-              ><p class="event-form__label-question">Phone Number</p>
-            </label>
-            <input type="text" placeholder="Phone Number" id="phone" class="event-form__input" required/>
-          </div>
-          <div class="event-form__field">
-            <label class="event-form__label" for="date"
-              ><p class="event-form__label-question">Date</p>
-            </label>
-            <input type="date"  
-           name="begin" 
-           placeholder="dd-mm-yyyy" 
-           value="" 
-           min="2024-05-31" 
-           max="2030-12-31" id="date" class="event-form__input" required/>
-          </div>
-          <div class="event-form__field">
-            <label class="event-form__label" for="location"
-              ><p class="event-form__label-question">
-                Location ( City, State )
-              </p>
-            </label>
-            <input type="text" placeholder="Location" id="location" class="event-form__input" required/>
-          </div>
-        </div>
-        <div class="event-form__tip">
-          <div class="event-form__field">
-            <label class="event-form__label" for="tip"
-              ><p class="event-form__label-question">Description of Event:</p>
-            </label>
-            <textarea placeholder="Tell us about your event!" class="event-form__input" name="tip" id="tip" required></textarea>
-          </div>
-          <input
-            class="event-form__submit"
-            type="submit"
-            value="Submit Your Tip"
-          />
-        </div>
-      </form>
-    </div>
     </section>
     <section class="callout">
       <div class="callout-item">

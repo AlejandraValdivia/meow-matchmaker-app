@@ -43,7 +43,6 @@ app.use("/cats", require("./controllers/cats"));
 app.use("/fanclub", require("./controllers/fanclub"));
 app.use("/application-form", require("./controllers/application-form"));
 app.use("/learn-more", require("./controllers/learn-more"));
-// app.use("/event", require("./controllers/event"));
 app.use("/contact", require("./controllers/contact"));
 
 // Home page
@@ -53,7 +52,7 @@ app.get("/", (req, res) => {
 
 // Error handling for 404 responses
 app.all('*', (req, res) => {
-  res.status(404).send('404');
+  res.status(404).render('404');
 });
 
 // Server
