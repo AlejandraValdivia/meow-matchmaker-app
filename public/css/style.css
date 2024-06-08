@@ -605,6 +605,13 @@ label {
 }
 
 @media (min-width:768px) {
+  .services-box.box-2 {
+    min-height: 36rem;
+}
+
+.services-box.box-8 {
+  min-height: 34rem;
+}
 
   .footer {
     display: flex;
@@ -672,14 +679,12 @@ section span {
 
   .contact {
     min-height: auto;
-    /* display: flex; */
     flex-direction: column;
     align-items: center;
   }
 
   .signup-form {
     min-height: auto;
-    /* display: flex; */
     flex-direction: column;
     align-items: center;
   }
@@ -716,8 +721,18 @@ select.services-box option {
   border-radius: 15px;
 }
 
+
+
 @media (min-width: 1024px) {
+  .services-box.box-2 {
+    min-height: 34rem; 
+}
+
   .footer-link-list {
     margin: 0 40px;
   }
 }
+
+
+
+  
