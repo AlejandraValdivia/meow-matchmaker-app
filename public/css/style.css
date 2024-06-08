@@ -605,6 +605,9 @@ label {
 }
 
 @media (min-width:768px) {
+  .services-box.box-2 {
+    min-height: 36rem;
+}
 
   .footer {
     display: flex;
@@ -720,4 +723,8 @@ select.services-box option {
   .footer-link-list {
     margin: 0 40px;
   }
+/* 
+  .services-box.box-2 {
+    min-height: 34rem;
+} */
 }
