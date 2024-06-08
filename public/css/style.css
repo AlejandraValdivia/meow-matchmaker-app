@@ -609,10 +609,6 @@ label {
     min-height: 36rem;
 }
 
-.services-box.box-8 {
-  min-height: 34rem;
-}
-
   .footer {
     display: flex;
     flex-direction: row-wrap;
