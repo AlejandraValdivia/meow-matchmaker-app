@@ -130,4 +130,11 @@ Go to http://localhost:3000/ and browse the app.
 - origin (country of origin)
 - services
 
-![erd-diagram](public/assets/img/erd-databases.jpeg)
+### Contact Form
+
+- id
+- name
+- email
+- message
+
+![erd-diagram](public/assets/img/meow-matchmaker-databases-erd.jpeg)
