@@ -19,7 +19,7 @@
 
 :sparkles: **FUNDAMENTALS** :sparkles:
 
-- [ ] Deployed (e.g. Heroku)
+- [x] Deployed (e.g. Heroku)
 - [x] Site has basic functionality related to its goal
 - [x] At least 10 `GET` routes (including auth)
 - [x] At least 2 `POST` route

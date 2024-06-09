@@ -1,3 +1,4 @@
+/* Global styles */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 * {
@@ -47,16 +48,12 @@ a.btn.btn-primary.btn-search {
   margin-bottom: 12rem;
 }
 
-.selector-for-some-widget {
-  box-sizing: content-box;
-}
-
 section {
   height: auto;
   padding: 10rem 9% 2rem;
 }
 
-/* ---- HEADER -------------------------------- */
+/* Header */
 .header {
   position: fixed;
   top: 0;
@@ -104,7 +101,6 @@ section {
   }
 }
 
-/* ---- Home page ---- */
 .home-content h3 {
   font-size: 3.2rem;
   font-weight: 700;
@@ -147,6 +143,7 @@ h2.black-heading {
 .home-content p {
   font-size: 1.6rem;
 }
+
 .social-media a {
   display: inline-flex;
   justify-content: center;
@@ -177,7 +174,7 @@ h2.black-heading {
   font-size: 1.6rem;
   color: var(--text-color);
   letter-spacing: 0.1rem;
-  transform: 0.5s ease;
+  transition: 0.5s ease;
   margin: 2rem;
 }
 
@@ -205,7 +202,7 @@ a.heading-h2 {
   color: white;
 }
 
-/* ---- About ---- */
+/* About */
 .about {
   display: flex;
   justify-content: center;
@@ -246,7 +243,7 @@ a.heading-h2 {
   color: var(--black-text-color);
 }
 
-/* ---- Services ---- */
+/* Services */
 .services h2 {
   margin-bottom: 5rem;
   color: var(--text-color);
@@ -273,6 +270,7 @@ a.heading-h2 {
   text-align: center;
   border: 0.2rem solid var(--bg-color);
   transition: 0.5s ease;
+  min-height: 36rem;
 }
 
 .services-container .services-box:hover {
@@ -296,7 +294,7 @@ a.heading-h2 {
   color: var(--black-text-color);
 }
 
-/* --- Homepage cat gallery showing app features --- */
+/* Portfolio */
 .portfolio {
   background: var(--second-bg-color);
 }
@@ -378,7 +376,7 @@ a.heading-h2 {
   color: var(--second-color);
 }
 
-/* --- Cat Gallery --- styles */
+/* Card */
 .card {
   transition: transform 0.2s;
 }
@@ -398,7 +396,7 @@ a.heading-h2 {
   color: #ff6f61;
 }
 
-/* ---- Contact Form --- styles */
+/* Contact Form */
 .contact h2 {
   margin-bottom: 3rem;
 }
@@ -468,7 +466,7 @@ label {
   margin-top: 1rem;
 }
 
-/* ---- Subscription form ---- */
+/* Subscription form */
 .subscription-form {
   display: flex;
   justify-content: center;
@@ -477,12 +475,12 @@ label {
   background: var(--bg-color);
 }
 
-/* ---- Post heading ---- */
+/* Post heading */
 .post-heading {
-   color: var(--text-color)
+  color: var(--text-color)
 }
 
-/* ---- Footer ---- */
+/* Footer */
 .footer {
   margin-top: 100px;
   background-color: var(--text-color);
@@ -549,7 +547,7 @@ label {
 }
 
 @media (max-width: 991px) {
-  header {
+  .header {
     padding: 2rem 3%;
   }
   section {
@@ -561,12 +559,11 @@ label {
   .services {
     padding-bottom: 7rem;
   }
-  .portolio {
+  .portfolio {
     padding-bottom: 7rem;
   }
   .contact {
     min-height: auto;
-    /* display: flex; */
     flex-direction: column;
     align-items: center;
   }
@@ -590,7 +587,7 @@ label {
     flex-direction: column-reverse;
   }
   .about img {
-    width: 70vw;
+    width: 40vw;
     margin-top: 4rem;
   }
   .services h2 {
@@ -602,13 +599,14 @@ label {
   .portfolio-container {
     grid-template-columns: repeat(2, 1fr);
   }
+  .services-container .services-box {
+    flex: 1 1 100%;
+    min-height: auto;
+  }
 }
 
 @media (min-width:768px) {
-  .services-box.box-2 {
-    min-height: 36rem;
-}
-
+  
   .footer {
     display: flex;
     flex-direction: row-wrap;
@@ -621,6 +619,9 @@ label {
 @media (max-width: 615px) {
   .portfolio-container {
     grid-template-columns: 1fr;
+  }
+  .services-container .services-box {
+    flex: 1 1 100%;
   }
 }
 
@@ -666,19 +667,16 @@ section span {
     width: 70%;
     padding: 2rem 0;
   }
-
   .footer-links {
     padding: 44px 0;
     color: var(--black-text-color);
     display: flex;
   }
-
   .contact {
     min-height: auto;
     flex-direction: column;
     align-items: center;
   }
-
   .signup-form {
     min-height: auto;
     flex-direction: column;
@@ -717,18 +715,24 @@ select.services-box option {
   border-radius: 15px;
 }
 
-
-
 @media (min-width: 1024px) {
   .services-box.box-2 {
-    min-height: 34rem; 
-}
-
+    height: auto;
+    width: fit-content;
+  }
   .footer-link-list {
     margin: 0 40px;
   }
 }
 
+@media (min-width: 1200px) {
 
+  .services-box.box-2 {
+    height: auto;
+    width: fit-content;
+  }
 
-  
+  .footer-link-list {
+    margin: 0 60px;
+  }
+}

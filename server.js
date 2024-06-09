@@ -1,18 +1,23 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("./config/passport-config");
 const methodOverride = require('method-override');
+const path = require('path');
+const mongoose = require('mongoose');
 
 // Set environment variables
-const SECRET_SESSION = process.env.SECRET_SESSION;
+const { SECRET_SESSION, MONGO_URI } = process.env;
 const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(express.static(__dirname + "/public"));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use(
   session({
     secret: SECRET_SESSION,
@@ -22,18 +27,16 @@ app.use(
 );
 app.use(flash());
 
-// Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Middleware for tracking users and alerts
 app.use((req, res, next) => {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
   next(); 
 });
 
-// Import auth routes
+// Import routes
 app.use("/auth", require("./controllers/auth"));
 app.use("/dashboard", require("./controllers/dashboard"));
 app.use("/profile", require("./controllers/profile"));
@@ -53,6 +56,16 @@ app.get("/", (req, res) => {
 // Error handling for 404 responses
 app.all('*', (req, res) => {
   res.status(404).render('404');
+});
+
+// Connect to MongoDB
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('Connected to MongoDB');
+}).catch((err) => {
+  console.error('Error connecting to MongoDB', err);
 });
 
 // Server
