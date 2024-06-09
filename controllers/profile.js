@@ -30,11 +30,7 @@ router.put('/', isLoggedIn, async (req, res) => {
     }
 });
 
-// Show delete profile page
-// router.get('/delete', isLoggedIn, (req, res) => {
-//     const { name, email, phone, username } = req.user;
-//     res.render('profile/delete', { name, email, phone, username });
-// });
+
 
 // Show delete a user id page
 router.get('/:id/delete', isLoggedIn, async (req, res) => {
