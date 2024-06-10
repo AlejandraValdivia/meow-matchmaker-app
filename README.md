@@ -47,10 +47,10 @@ The Meow Matchmaker App is a web application designed to connect users who are i
 ## Technologies Used
 
 Backend: Node.js, Express
-Frontend: EJS, CSS
+Frontend: EJS, CSS, HTML, JavaScript
 Database: MongoDB, Mongoose
 Authentication: Passport.js, bcrypt
-APIs: Yelp API (optional, for nearby pet services)
+APIs: The Cat API (optional, for nearby pet services)
 Contributing
 Fork the repository.
 Create your feature branch: git checkout -b feature/YourFeature
@@ -83,7 +83,7 @@ Go to http://localhost:3000/ and browse the app.
 
 ## Wireframe
 
-![wireframe](public/assets/img/meow-app-blue-v2.jpg)
+![wireframe](public/assets/img/meow-matchmaker-wireframe-v2.jpg)
 
 ## ERD - Database Schemas
 
@@ -118,7 +118,6 @@ Go to http://localhost:3000/ and browse the app.
 - id
 - content
 - username
-- postId
 
 ### Application Form
 
@@ -137,4 +136,4 @@ Go to http://localhost:3000/ and browse the app.
 - email
 - message
 
-![erd-diagram](public/assets/img/meow-matchmaker-databases-erd.jpeg)
+![erd-diagram](public/assets/img/erd-meow-matchmaker-databases.jpeg)
