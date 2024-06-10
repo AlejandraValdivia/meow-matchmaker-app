@@ -2,7 +2,7 @@
 
 ## Project Description
 
-The Meow Matchmaker App is a web application designed to connect users who are interested in adopting, fostering, or volunteering to help cats. Additionally, users can join a fan club to post and delete content, comment on posts, and make friends with other cat lovers.
+The Meow Matchmaker App is a web application designed to connect users who are interested in adopting, fostering, volunteering to care for cats, and looking for renting cats for events or special needs such as birthdays. Additionally, users can join a fan club to post and delete content, comment on posts, and make friends with other cat lovers.
 
 ## Table of Contents
 
@@ -37,12 +37,12 @@ The Meow Matchmaker App is a web application designed to connect users who are i
 ## User Stories
 
 - The users can sign up and log in, so they can access the app's features.
-- As an admin, the user can manage cat listings, so they can add, update, or remove cats from the database.
-- View available cats, so they can decide which one to adopt or foster or volunteer at our facilities.
+- As an admin, the user can browse cat listings, so they can apply to adopt, foster,volunteer or rent a cat they find.
+- As an admin, the user can delete posts, so they can remove unwanted content.
 - Join the fan club, so they can post and share content about cats.
-- Comment on posts, so they can interact with other users.
-- Delete posts, manage content.
-- Make friends with other users, so they can connect with fellow cat lovers. 🥰😻
+- As an admin, the user can delete comments, so they can remove unwanted content.
+- Make friends with other users, so they can connect with fellow cat lovers. 
+- Contact the shelter with any questions or concerns. 🥰😻
 
 ## Technologies Used
 
@@ -50,8 +50,9 @@ Backend: Node.js, Express
 Frontend: EJS, CSS, HTML, JavaScript
 Database: MongoDB, Mongoose
 Authentication: Passport.js, bcrypt
-APIs: The Cat API (optional, for nearby pet services)
-Contributing
+APIs: The Cat API 
+
+## Contributing
 Fork the repository.
 Create your feature branch: git checkout -b feature/YourFeature
 Commit your changes: git commit -m 'Add some feature'
@@ -79,7 +80,7 @@ Open a pull request.
 - npm install bcrypt
 - npm install connect-flash
 
-Go to http://localhost:3000/ and browse the app.
+Go to http://localhost:3000/ and browse the app!
 
 ## Wireframe
 
